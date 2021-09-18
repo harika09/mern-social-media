@@ -1,0 +1,79 @@
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.form-name {
+  display: flex;
+  gap: 20px;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  max-width: 550px;
+  margin: 0 auto;
+  background-color: #ffff;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px 42px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+  outline: none;
+}
+
+.email,
+.pass,
+.user,
+.fname,
+.lname {
+  position: relative;
+}
+
+.fname .fa-user,
+.lname .fa-user {
+  top: 35px;
+}
+
+.fa-envelope,
+.fa-lock,
+.fa-user {
+  position: absolute;
+  left: 10px;
+  top: 12px;
+  font-size: 1.5rem;
+}
+
+input[type="submit"] {
+  border: none;
+  outline: none;
+  background-color: #1e3163;
+  color: #fff;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  width: 100%;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.error {
+  background-color: #e05d5d;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.error p {
+  padding: 12px;
+}
