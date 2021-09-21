@@ -14,11 +14,11 @@ function Home() {
   const history = useHistory();
   const [isloading, setLoading] = useState(true);
   const [pageLoad, setPageLoad] = useState(true);
-  const [post, setPost] = useState([]);
   const [isModal, setIsModal] = useState(false);
   const [postId, setPostId] = useState({});
-  const [userId, setUserId] =
-    useState(""); /* Check is userId is in the post like Array */
+  const [post, setPost] = useState([]);
+  /* Check is userId is in the post like Array */
+  const [userId, setUserId] = useState("");
   const [maxPage, setMaxPage] = useState("");
 
   const showOptions = () => {
@@ -38,7 +38,7 @@ function Home() {
       headers
     );
 
-    setPost((prev) => [...prev, ...details.data.post]);
+    setPost([...post, ...details.data.post]);
     setMaxPage(details.data.totalPage);
     setLoading(false);
     setPageLoad(false);
@@ -48,9 +48,9 @@ function Home() {
   const btnLike = async (id) => {
     const requestedID = id;
 
-    await Axios.post(
-      `http://localhost:4000/post/like/${requestedID}`,
-      {},
+    await Axios.put(
+      "http://localhost:4000/post/like",
+      { postId: requestedID },
       {
         headers: {
           "Content-Type": "application/json",
@@ -58,24 +58,24 @@ function Home() {
         },
       }
     ).then((response) => {
-      /* Reload Post */
-      post.map((item) => {
-        if (item._id === response._id) {
-          // return response.data;
-          return userInfo();
+      const newData = post.map((value) => {
+        if (value._id === response.data._id) {
+          return response.data;
         } else {
-          return userInfo();
+          return value;
         }
       });
+
+      setPost(newData);
     });
   };
 
   const btnUnLike = async (id) => {
     const requestedID = id;
 
-    await Axios.post(
-      `http://localhost:4000/post/unlike/${requestedID}`,
-      {},
+    await Axios.put(
+      "http://localhost:4000/post/unlike",
+      { postId: requestedID },
       {
         headers: {
           "Content-Type": "application/json",
@@ -83,15 +83,15 @@ function Home() {
         },
       }
     ).then((response) => {
-      /* Reload Post */
-      post.map((item) => {
-        if (item._id === response._id) {
-          // return response.data;
-          return userInfo();
+      const newData = post.map((value) => {
+        if (value._id === response.data._id) {
+          return response.data;
         } else {
-          return userInfo();
+          return value;
         }
       });
+
+      setPost(newData);
     });
   };
 
@@ -123,40 +123,42 @@ function Home() {
 
     if (checkToken) {
       setUserId(data._id);
-
-      if (pageLoad) {
-        setLoading(false);
-      }
-
-      userInfo();
-
-      window.onscroll = infiniteScroll;
-
-      // This variable is used to remember if the function was executed.
-      let isExecuted = false;
-
-      function infiniteScroll() {
-        // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
-        if (
-          window.scrollY > document.body.offsetHeight - window.outerHeight &&
-          !isExecuted
-        ) {
-          // Set "isExecuted" to "true" to prevent further execution
-          isExecuted = true;
-          if (page === maxPage) {
-            setLoading(false);
-          } else {
-            setLoading(true);
-            setTimeout(() => {
-              setPage(page + 1);
-            }, 1500);
-          }
-
-          // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
-        }
-      }
     } else {
       history.push("/login");
+    }
+  });
+
+  useEffect(() => {
+    if (pageLoad) {
+      setLoading(false);
+    }
+
+    userInfo();
+
+    window.onscroll = infiniteScroll;
+
+    // This variable is used to remember if the function was executed.
+    let isExecuted = false;
+
+    function infiniteScroll() {
+      // Inside the "if" statement the "isExecuted" variable is negated to allow initial code execution.
+      if (
+        window.scrollY > document.body.offsetHeight - window.outerHeight &&
+        !isExecuted
+      ) {
+        // Set "isExecuted" to "true" to prevent further execution
+        isExecuted = true;
+        if (page === maxPage) {
+          setLoading(false);
+        } else {
+          setLoading(true);
+          setTimeout(() => {
+            setPage(page + 1);
+          }, 1500);
+        }
+
+        // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
+      }
     }
   }, [page]);
 

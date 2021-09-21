@@ -29,11 +29,6 @@ function UsersProfile() {
     setLoading(false);
   };
 
-  const bntLogout = () => {
-    localStorage.clear();
-    history.push("/login");
-  };
-
   useEffect(() => {
     const Token = localStorage.getItem("Token");
     if (Token) {
@@ -64,19 +59,6 @@ function UsersProfile() {
                     <div>
                       <strong>{profile.username}</strong>
                     </div>
-
-                    <div className="profile-btn">
-                      <button className="btn-edit">
-                        <i className="fas fa-cog"></i> Edit Profile
-                      </button>
-                      <button
-                        className="btn-logout"
-                        onClick={() => bntLogout()}
-                      >
-                        <i className="fas fa-sign-out-alt"></i>
-                        Logout
-                      </button>
-                    </div>
                   </div>
 
                   <div className="profile-other-info">
@@ -105,7 +87,9 @@ function UsersProfile() {
                 {post.map((posts, key) => {
                   return (
                     <div key={posts._id} className="posts-content">
-                      <img src={posts.image} alt="" />
+                      <Link to={`/view/post/${posts._id}`}>
+                        <img src={posts.image} alt="" />
+                      </Link>
                     </div>
                   );
                 })}

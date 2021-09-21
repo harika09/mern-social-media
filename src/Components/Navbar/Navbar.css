@@ -1,15 +1,24 @@
-a {
-  text-decoration: none;
-}
-
 li {
   list-style: none;
+}
+
+.nav-container {
+  padding: 15px;
+  width: 100%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  transition: 0.5s;
+  background-color: #22577a;
+  color: #fff;
 }
 
 .nav-content {
   display: flex;
   justify-content: space-between;
-  padding: 20px;
+  align-items: c;
+  padding: 10px;
 }
 
 .navbar-menu {
@@ -17,6 +26,10 @@ li {
 }
 
 .navbar-menu li {
-  margin-left: 15px;
+  margin-left: 20px;
   font-size: 1.2rem;
+}
+
+.navbar-menu li a {
+  color: #fff;
 }

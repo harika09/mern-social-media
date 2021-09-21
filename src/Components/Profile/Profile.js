@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { BounceLoader } from "react-spinners";
+import Navbar from "../Navbar/Navbar";
+import Modal from "react-modal";
 import Axios from "axios";
 import "./Profile.css";
-import Navbar from "../Navbar/Navbar";
 
 function Profile() {
   const history = useHistory();
   const [profile, setProfile] = useState({});
   const [post, setPost] = useState([]);
   const [isloading, setLoading] = useState(true);
+  const [isModal, setIsModal] = useState(false);
+  const [state, setState] = useState({});
+  const [error, setError] = useState("");
+
+  const showEditModal = () => {
+    setIsModal(!isModal);
+  };
 
   const headers = {
     headers: {
@@ -31,6 +39,35 @@ function Profile() {
   const bntLogout = () => {
     localStorage.clear();
     history.push("/login");
+  };
+
+  const updateProfile = (e) => {
+    e.preventDefault();
+    const { username, firstName, lastName, email } = state;
+
+    Axios.put(
+      "http://localhost:4000/post/profile/update",
+      {
+        username: username,
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      if (response.data.error) {
+        setError(response.data.error);
+      } else {
+        setError(response.data.success);
+        setTimeout(() => {
+          setIsModal(false);
+        }, 1000);
+      }
+    });
   };
 
   useEffect(() => {
@@ -64,7 +101,14 @@ function Profile() {
                     </div>
 
                     <div className="profile-btn">
-                      <button className="btn-edit">
+                      <button
+                        onClick={() => {
+                          showEditModal();
+                          setState(profile);
+                          setError("");
+                        }}
+                        className="btn-edit"
+                      >
                         <i className="fas fa-cog"></i> Edit Profile
                       </button>
                       <button
@@ -112,6 +156,64 @@ function Profile() {
                 })}
               </div>
             </div>
+          )}
+          {Object.keys(state).length > 0 ? (
+            <Modal
+              isOpen={isModal}
+              onRequestClose={() => setIsModal(false)}
+              className="edit-modal"
+            >
+              {error && (
+                <div className="error">
+                  <p>{error}</p>
+                </div>
+              )}
+              <form onSubmit={updateProfile}>
+                <input
+                  type="text"
+                  placeholder="Update Username"
+                  name="username"
+                  value={state.username}
+                  onChange={(e) =>
+                    setState({ ...state, [e.target.name]: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Update First Name"
+                  name="firstName"
+                  value={state.firstName}
+                  onChange={(e) =>
+                    setState({ ...state, [e.target.name]: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Update Last Name"
+                  name="lastName"
+                  value={state.lastName}
+                  onChange={(e) =>
+                    setState({ ...state, [e.target.name]: e.target.value })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Update Email"
+                  name="email"
+                  value={state.email}
+                  onChange={(e) =>
+                    setState({ ...state, [e.target.name]: e.target.value })
+                  }
+                />
+                <input
+                  type="submit"
+                  onSubmit={updateProfile}
+                  value="Update Profile"
+                />
+              </form>
+            </Modal>
+          ) : (
+            ""
           )}
         </div>
       </div>

@@ -21,7 +21,6 @@ function CreatePost() {
     if (!title.trim() || !content.trim()) {
       setError("Empty Fields");
     } else {
-      console.log(image);
       Axios.post(
         "http://localhost:4000/post/newPost",
 

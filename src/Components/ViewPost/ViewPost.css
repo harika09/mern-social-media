@@ -1,3 +1,6 @@
+.view-post-container {
+  padding-top: 90px;
+}
 .view-post-card {
   max-width: 650px;
   margin: 20px auto;
@@ -67,6 +70,11 @@
   align-self: center;
 }
 
+.view-post-info span {
+  display: block;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
 .view-post-info,
 .view-post-comment-input {
   padding: 10px;
@@ -85,7 +93,8 @@
   bottom: auto;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  width: 650px;
+  width: 450px;
+  max-width: 100%;
   padding: 15px;
   background-color: #ffff;
   border: 1px solid #cccc;

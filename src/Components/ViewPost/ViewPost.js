@@ -17,9 +17,15 @@ function ViewPost({ userID }) {
   const [comment, setComment] = useState("");
   const [loadComment, setLoadComment] = useState([]);
   const [isModal, setIsModal] = useState(false);
+  const [actionModal, setActionModal] = useState(false);
+  const [postId, setPostId] = useState({});
 
   const showModal = () => {
     setIsModal(!isModal);
+  };
+
+  const showActionModal = () => {
+    setActionModal(!actionModal);
   };
 
   const headers = {
@@ -42,45 +48,34 @@ function ViewPost({ userID }) {
   const btnLike = async (id) => {
     const requestedID = id;
 
-    await Axios.post(
-      `http://localhost:4000/post/like/${requestedID}`,
-      {},
+    await Axios.put(
+      `http://localhost:4000/post/like`,
+      { postId: requestedID },
       {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
-    ).then((response) => {
-      /* Reload Post */
-      if (post._id === response._id) {
-        getPost();
-      } else {
-        getPost();
-      }
-    });
+    );
+
+    getPost();
   };
 
   const btnUnLike = async (id) => {
     const requestedID = id;
 
-    await Axios.post(
-      `http://localhost:4000/post/unlike/${requestedID}`,
-      {},
+    await Axios.put(
+      `http://localhost:4000/post/unlike`,
+      { postId: requestedID },
       {
         headers: {
           "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
-    ).then((response) => {
-      /* Reload Post */
-      if (post._id === response._id) {
-        getPost();
-      } else {
-        getPost();
-      }
-    });
+    );
+    getPost();
   };
 
   const submitComment = (e) => {
@@ -104,6 +99,26 @@ function ViewPost({ userID }) {
         getPost();
       });
     }
+  };
+
+  const deletePost = async (id) => {
+    const requestedID = id;
+    await Axios.delete(
+      `http://localhost:4000/post/delete/${requestedID}`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    );
+
+    setIsloading(true);
+    setTimeout(() => {
+      history.push("/");
+    }, 2500);
+    setActionModal(false);
   };
 
   useEffect(() => {
@@ -149,7 +164,13 @@ function ViewPost({ userID }) {
 
                 {post.userId === userId ? (
                   <div className="top-post-btn-action">
-                    <i className="fas fa-ellipsis-h"></i>
+                    <i
+                      onClick={() => {
+                        showActionModal();
+                        setPostId(post._id);
+                      }}
+                      className="fas fa-ellipsis-h"
+                    ></i>
                   </div>
                 ) : (
                   ""
@@ -160,7 +181,7 @@ function ViewPost({ userID }) {
               </div>
 
               <div className="view-post-info">
-                <span>{post.title}</span>
+                <span className="post-title">{post.title}</span>
                 <p>{post.content}</p>
               </div>
 
@@ -196,8 +217,8 @@ function ViewPost({ userID }) {
                 </div>
 
                 <div className="view-post-comment">
-                  {post.comments.length <= 1 ? (
-                    <button>{post.comments.length} Comment</button>
+                  {post.comments.length <= 0 ? (
+                    <button>No Comment</button>
                   ) : (
                     <button
                       onClick={() => {
@@ -241,11 +262,16 @@ function ViewPost({ userID }) {
                   <div className="comments-list">
                     <div className="comments-user-list">
                       <div className="comments-user-image">
-                        <img src={value.avatar} alt={value.username} />
+                        <Link to={`/view/profile/${value.userId}`}>
+                          <img src={value.avatar} alt={value.username} />
+                        </Link>
                       </div>
 
                       <div className="comments-user-info">
-                        <h3>{value.username}</h3>
+                        <Link to={`/view/profile/${post.userId}`}>
+                          <h3>{value.username}</h3>
+                        </Link>
+
                         <p>{value.comment}</p>
                         <span>{moment(value.createdAt).fromNow()}</span>
                       </div>
@@ -254,6 +280,16 @@ function ViewPost({ userID }) {
                 </div>
               );
             })}
+          </Modal>
+
+          <Modal
+            isOpen={actionModal}
+            onRequestClose={() => setActionModal(false)}
+            className="modal"
+          >
+            <button onClick={() => deletePost(postId)}>Delete</button>
+            <hr className="profile-line" />
+            <button>Edit</button>
           </Modal>
         </div>
       </div>

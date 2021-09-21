@@ -12,14 +12,17 @@ function Navbar() {
 
         <ul className="navbar-menu">
           <li className="nav-list">
+            <i className="fas fa-home"></i>
             <Link to="/">Home</Link>
           </li>
 
           <li className="nav-list">
+            <i className="fas fa-plus-circle"></i>
             <Link to="/post">Create Post</Link>
           </li>
 
           <li className="nav-list">
+            <i className="fas fa-user-circle"></i>
             <Link to="/profile">Profile</Link>
           </li>
         </ul>
