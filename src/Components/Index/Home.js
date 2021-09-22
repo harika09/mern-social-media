@@ -34,7 +34,7 @@ function Home() {
   /* Loading User Info */
   const userInfo = async () => {
     const details = await Axios.get(
-      `http://localhost:4000/post/posts?page=${page}`,
+      `https://mern-social-konek.herokuapp.com/post/posts?page=${page}`,
       headers
     );
 
@@ -49,7 +49,7 @@ function Home() {
     const requestedID = id;
 
     await Axios.put(
-      "http://localhost:4000/post/like",
+      "https://mern-social-konek.herokuapp.com/post/like",
       { postId: requestedID },
       {
         headers: {
@@ -74,7 +74,7 @@ function Home() {
     const requestedID = id;
 
     await Axios.put(
-      "http://localhost:4000/post/unlike",
+      "https://mern-social-konek.herokuapp.com/post/unlike",
       { postId: requestedID },
       {
         headers: {
@@ -98,7 +98,7 @@ function Home() {
   const btnDelete = async (id) => {
     const requestedID = id;
     await Axios.delete(
-      `http://localhost:4000/post/delete/${requestedID}`,
+      `https://mern-social-konek.herokuapp.com/post/delete/${requestedID}`,
 
       {
         headers: {

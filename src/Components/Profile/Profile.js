@@ -28,7 +28,7 @@ function Profile() {
 
   const loadUserInfo = async () => {
     const userInfo = await Axios.get(
-      "http://localhost:4000/auth/profile",
+      "https://mern-social-konek.herokuapp.com/auth/profile",
       headers
     );
 
@@ -54,11 +54,15 @@ function Profile() {
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
 
-    Axios.put("http://localhost:4000/post/profile/update", formData, {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("Token"),
-      },
-    }).then((response) => {
+    Axios.put(
+      "https://mern-social-konek.herokuapp.com/post/profile/update",
+      formData,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
       if (response.data.error) {
         setError(response.data.error);
       } else {
