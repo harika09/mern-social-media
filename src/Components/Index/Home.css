@@ -33,10 +33,13 @@
 }
 
 .top-post-content .post-user-info img {
-  max-width: 100%;
-  width: 35px;
-  height: 35px;
-  border-radius: 100%;
+  width: 100%;
+  max-width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  cursor: pointer;
   border: 1px solid #cccc;
 }
 

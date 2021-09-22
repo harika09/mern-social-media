@@ -11,11 +11,15 @@
 }
 
 .profile-top-content img {
-  width: 150px;
-  max-width: 100%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  cursor: pointer;
+  float: right;
   border: 1px solid #cccc;
-  border-radius: 100%;
 }
 
 .profile-name {
@@ -110,6 +114,28 @@
 .edit-modal input[type="text"] {
   width: 100%;
   border: 1px solid #ccc;
+}
+
+/*Upload Image*/
+
+label input {
+  height: 0;
+  opacity: 0;
+  width: 0;
+}
+
+label .fa-camera {
+  margin: 20px auto;
+  cursor: pointer;
+  margin: 10px;
+  font-size: 2rem;
+}
+
+/* Follow Btn */
+.profile-btn .btn-follow {
+  background-color: #0095f6;
+  color: #fff;
+  border-radius: 4px;
 }
 
 @media screen and (max-width: 900px) {

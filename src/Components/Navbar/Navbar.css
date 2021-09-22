@@ -33,3 +33,7 @@ li {
 .navbar-menu li a {
   color: #fff;
 }
+
+.nav-list i {
+  margin-right: 5px;
+}

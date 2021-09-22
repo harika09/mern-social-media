@@ -11,6 +11,7 @@ function UsersProfile() {
   const [profile, setProfile] = useState({});
   const [isloading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
+  const [userId, setUserId] = useState("");
 
   const headers = {
     headers: {
@@ -29,10 +30,18 @@ function UsersProfile() {
     setLoading(false);
   };
 
+  const btnFollow = () => {
+    alert("Follow");
+  };
+
   useEffect(() => {
     const Token = localStorage.getItem("Token");
+    const userData = localStorage.getItem("User");
+    const data = JSON.parse(userData);
+
     if (Token) {
       loadProfile();
+      setUserId(data._id);
     } else {
       useHistory.push("/login");
     }
@@ -51,13 +60,28 @@ function UsersProfile() {
             <div className="profile-wrapper">
               <div className="profile-top-content">
                 <div className="profile-avatar">
-                  <img src={profile.avatar} alt={profile.username} />
+                  <img src={profile.image} alt={profile.username} />
                 </div>
 
                 <div className="profile-info">
                   <div className="profile-name">
                     <div>
                       <strong>{profile.username}</strong>
+                    </div>
+
+                    <div className="profile-btn">
+                      {profile._id != userId ? (
+                        <button
+                          onClick={() => {
+                            btnFollow();
+                          }}
+                          className="btn-follow"
+                        >
+                          Follow
+                        </button>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
 

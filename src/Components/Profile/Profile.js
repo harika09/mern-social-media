@@ -14,6 +14,7 @@ function Profile() {
   const [isModal, setIsModal] = useState(false);
   const [state, setState] = useState({});
   const [error, setError] = useState("");
+  const [image, setImage] = useState("");
 
   const showEditModal = () => {
     setIsModal(!isModal);
@@ -43,28 +44,30 @@ function Profile() {
 
   const updateProfile = (e) => {
     e.preventDefault();
+
     const { username, firstName, lastName, email } = state;
 
-    Axios.put(
-      "http://localhost:4000/post/profile/update",
-      {
-        username: username,
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+    const formData = new FormData();
+
+    formData.append("image", image);
+    formData.append("username", username);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+
+    Axios.put("http://localhost:4000/post/profile/update", formData, {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("Token"),
       },
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("Token"),
-        },
-      }
-    ).then((response) => {
+    }).then((response) => {
       if (response.data.error) {
         setError(response.data.error);
       } else {
+        console.log(response);
         setError(response.data.success);
+
         setTimeout(() => {
           setIsModal(false);
+          loadUserInfo();
         }, 1000);
       }
     });
@@ -91,7 +94,7 @@ function Profile() {
             <div className="profile-wrapper">
               <div className="profile-top-content">
                 <div className="profile-avatar">
-                  <img src={profile.avatar} alt={profile.username} />
+                  <img src={profile.image} alt={profile.username} />
                 </div>
 
                 <div className="profile-info">
@@ -169,6 +172,15 @@ function Profile() {
                 </div>
               )}
               <form onSubmit={updateProfile}>
+                <p className="add-image">Click to upload image</p>
+                <label>
+                  <input
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
+                    accept="image/jpeg, image/png"
+                  />
+                  <i className="fas fa-camera"></i>
+                </label>
                 <input
                   type="text"
                   placeholder="Update Username"
@@ -197,6 +209,7 @@ function Profile() {
                   }
                 />
                 <input
+                  disabled="true"
                   type="text"
                   placeholder="Update Email"
                   name="email"
