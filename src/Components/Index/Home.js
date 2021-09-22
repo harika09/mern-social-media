@@ -194,7 +194,7 @@ function Home() {
                         <div className="post-action-btn">
                           <button
                             onClick={() => {
-                              showOptions();
+                              showOptions(posts._id);
                               setPostId(posts._id);
                             }}
                           >
@@ -243,11 +243,13 @@ function Home() {
                         <div className="view-comments">
                           {posts.comments.length <= 1 ? (
                             <Link to="#">
-                              <span>{posts.comments.length} Comment</span>{" "}
+                              <i className="far fa-comment-alt"></i>
+                              <span> {posts.comments.length}</span>
                             </Link>
                           ) : (
                             <Link to="#">
-                              <span>{posts.comments.length} Comments</span>
+                              <i className="far fa-comment-alt"></i>
+                              <span>{posts.comments.length}</span>
                             </Link>
                           )}
                         </div>

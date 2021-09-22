@@ -74,10 +74,19 @@
   align-self: center;
 }
 
+.view-post-comment button {
+  font-size: 1.3rem;
+}
+
+.view-post-comment i {
+  margin-right: 5px;
+}
+
 .view-post-info span {
   display: block;
   margin-bottom: 15px;
   font-weight: bold;
+  font-size: 1.3rem;
 }
 .view-post-info,
 .view-post-comment-input {

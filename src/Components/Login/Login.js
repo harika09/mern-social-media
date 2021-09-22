@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Logo from "../../Assets/images/logo.png";
 import Axios from "axios";
 import "./Login.css";
 
@@ -12,7 +13,7 @@ function Login() {
   const login = (e) => {
     e.preventDefault();
 
-    Axios.post(`http://localhost:4000/auth/login`, {
+    Axios.post(`https://mern-social-konek.herokuapp.com/auth/login`, {
       email: email,
       password: password,
     }).then((response) => {
@@ -36,6 +37,9 @@ function Login() {
   return (
     <div className="login-container">
       <div className="login-content bd-container">
+        <div className="login-logo">
+          <img src={Logo} alt="Logo" />
+        </div>
         <div className="login-form">
           {error && (
             <div className="error">

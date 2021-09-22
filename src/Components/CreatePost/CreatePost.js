@@ -82,7 +82,7 @@ function CreatePost() {
                   onChange={(e) => setImage(e.target.files[0])}
                   accept="image/jpeg, image/png"
                 />
-                <i className="fas fa-camera"></i>
+                <i className="fas fa-image"></i>
               </label>
 
               <input type="submit" value="Post" onClick={() => submitPost} />

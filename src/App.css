@@ -5,9 +5,20 @@
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+button,
+a,
+img,
+i {
+  -webkit-tap-highlight-color: rgba(
+    0,
+    0,
+    0,
+    0
+  ); /* remove  blue background when button clicked */
+}
 
-*:focus {
-  outline: none;
+button {
+  -webkit-appearance: none;
 }
 
 .bd-container {

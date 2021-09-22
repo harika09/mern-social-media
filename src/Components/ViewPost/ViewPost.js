@@ -218,14 +218,18 @@ function ViewPost({ userID }) {
 
                 <div className="view-post-comment">
                   {post.comments.length <= 0 ? (
-                    <button>No Comment</button>
+                    <span>
+                      <i className="far fa-comment-alt"></i>
+                      {post.comments.length}
+                    </span>
                   ) : (
                     <button
                       onClick={() => {
                         showModal();
                       }}
                     >
-                      View {post.comments.length} Comments
+                      <i className="far fa-comment-alt"></i>
+                      {post.comments.length}
                     </button>
                   )}
                 </div>

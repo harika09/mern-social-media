@@ -7,7 +7,7 @@ a {
   display: flex;
   gap: 20px;
 }
-.register-form {
+.register-content {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -15,6 +15,7 @@ a {
   max-width: 550px;
   margin: 0 auto;
   background-color: #ffff;
+  padding: 10px;
 }
 input[type="text"],
 input[type="email"],
@@ -76,4 +77,28 @@ input[type="submit"]:hover {
 
 .error p {
   padding: 12px;
+}
+
+.register-logo {
+  margin: 0 auto;
+}
+
+.have-account a {
+  display: block;
+  color: #345b63;
+  margin-top: 10px;
+}
+
+.have-account a:hover {
+  opacity: 0.5;
+}
+
+@media screen and (max-width: 600px) {
+  label,
+  .have-account a,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    font-size: 0.9rem;
+  }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Logo from "../../Assets/images/logo.png";
 import Axios from "axios";
 import "./Register.css";
 
@@ -15,7 +16,7 @@ function Register() {
   const Register = (e) => {
     e.preventDefault();
 
-    Axios.post(`http://localhost:4000/auth/register`, {
+    Axios.post(`https://mern-social-konek.herokuapp.com/auth/register`, {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -41,7 +42,10 @@ function Register() {
 
   return (
     <div className="register-container">
-      <div className="register-content">
+      <div className="register-content bd-container">
+        <div className="register-logo">
+          <img src={Logo} alt="Logo" />
+        </div>
         <div className="register-form">
           <form onSubmit={Register}>
             {error && (
@@ -108,6 +112,10 @@ function Register() {
 
             <input type="submit" value="Register" />
           </form>
+
+          <div className="have-account">
+            <Link to="/login">Already have an account?</Link>
+          </div>
         </div>
       </div>
     </div>

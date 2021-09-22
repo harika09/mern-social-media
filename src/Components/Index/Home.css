@@ -104,8 +104,12 @@ button {
 }
 
 .view-comments {
-  font-size: 0.9rem;
+  font-size: 1.3rem;
   align-self: center;
+}
+
+.view-comments i {
+  margin-right: 5px;
 }
 
 .bottom-post-info {

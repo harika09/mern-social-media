@@ -2,7 +2,7 @@ a {
   text-decoration: none;
   color: #000;
 }
-.login-form {
+.login-content {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -10,6 +10,7 @@ a {
   max-width: 550px;
   margin: 0 auto;
   background-color: #ffff;
+  padding: 10px;
 }
 
 input[type="email"],
@@ -61,6 +62,10 @@ input[type="submit"]:hover {
   font-size: 1rem;
 }
 
+.login-low-content a {
+  color: #345b63;
+}
+
 .login-low-content a:hover {
   color: #cccc;
 }
@@ -78,4 +83,14 @@ form span {
 
 .error p {
   padding: 12px;
+}
+
+.login-logo {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 600px) {
+  .login-low-content a {
+    font-size: 0.9rem;
+  }
 }
