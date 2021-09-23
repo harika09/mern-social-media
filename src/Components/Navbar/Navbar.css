@@ -40,6 +40,10 @@ li {
   height: 35px;
 }
 
+.nav-list i {
+  margin-right: 5px;
+}
+
 @media screen and (max-width: 680px) {
   .navbar-menu {
     display: none;

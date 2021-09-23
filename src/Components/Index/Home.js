@@ -194,7 +194,7 @@ function Home() {
                         <div className="post-action-btn">
                           <button
                             onClick={() => {
-                              showOptions(posts._id);
+                              showOptions();
                               setPostId(posts._id);
                             }}
                           >

@@ -53,9 +53,11 @@ function Profile() {
     formData.append("username", username);
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
+
     try {
       Axios.put(
-        "https://mern-social-konek.herokuapp.com/post/profile/update",
+        /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
+        "http://localhost:4000/post/profile/update",
         formData,
         {
           headers: {
@@ -68,7 +70,6 @@ function Profile() {
         } else {
           /* Success update */
           setError(response.data.success);
-          setIsModal(false);
         }
       });
     } catch (err) {
@@ -174,6 +175,7 @@ function Profile() {
                   <p>{error}</p>
                 </div>
               )}
+
               <form onSubmit={updateProfile}>
                 <p className="add-image">Click to upload image</p>
                 <label>
