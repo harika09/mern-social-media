@@ -29,10 +29,21 @@ function UsersProfile() {
     setProfile(profile.data.user);
     setPost(profile.data.post);
     setLoading(false);
+    console.log(profile);
   };
 
-  const btnFollow = () => {
-    alert("Follow");
+  const btnFollow = (id) => {
+    Axios.put(
+      `http://localhost:4000/auth/unfollow`,
+      { requestedUserId: id },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      console.log(response);
+    });
   };
 
   useEffect(() => {
@@ -44,9 +55,9 @@ function UsersProfile() {
       loadProfile();
       setUserId(data._id);
     } else {
-      useHistory.push("/login");
+      history.push("/login");
     }
-  });
+  }, [userId]);
 
   return (
     <>
@@ -74,7 +85,7 @@ function UsersProfile() {
                       {profile._id !== userId ? (
                         <button
                           onClick={() => {
-                            btnFollow();
+                            btnFollow(profile._id);
                           }}
                           className="btn-follow"
                         >

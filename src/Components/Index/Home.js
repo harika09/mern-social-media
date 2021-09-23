@@ -126,7 +126,7 @@ function Home() {
     } else {
       history.push("/login");
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (pageLoad) {
