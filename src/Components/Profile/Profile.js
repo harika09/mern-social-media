@@ -8,10 +8,11 @@ import "./Profile.css";
 
 function Profile() {
   const history = useHistory();
-  const [profile, setProfile] = useState({});
-  const [post, setPost] = useState([]);
   const [isloading, setLoading] = useState(true);
   const [isModal, setIsModal] = useState(false);
+  const [profile, setProfile] = useState({});
+  const [userId, setUserId] = useState("");
+  const [post, setPost] = useState([]);
   const [state, setState] = useState({});
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
@@ -28,7 +29,8 @@ function Profile() {
 
   const loadUserInfo = async () => {
     const userInfo = await Axios.get(
-      "https://mern-social-konek.herokuapp.com/auth/profile",
+      /* http://localhost:4000/ */ /* https://mern-social-konek.herokuapp.com */
+      `https://mern-social-konek.herokuapp.com/auth/profile/${userId}`,
       headers
     );
 
@@ -54,36 +56,38 @@ function Profile() {
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
 
-    try {
-      Axios.put(
-        /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
-        "http://localhost:4000/post/profile/update",
-        formData,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("Token"),
-          },
-        }
-      ).then((response) => {
-        if (response.data.error) {
-          setError(response.data.error);
-        } else {
-          /* Success update */
-          setError(response.data.success);
-        }
-      });
-    } catch (err) {
-      setError("Something went wrong! Please Refresh");
-    }
+    Axios.put(
+      /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
+      "http://localhost:4000/post/profile/update",
+      formData,
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      if (response.data.error) {
+        setError(response.data.error);
+      } /* Success update */
+      setError(response.data.success);
+      setTimeout(() => {
+        loadUserInfo();
+        setIsModal(false);
+      }, 1000);
+    });
   };
 
   useEffect(() => {
-    if (localStorage.getItem("Token")) {
+    const Token = localStorage.getItem("Token");
+    const userData = localStorage.getItem("User");
+    const data = JSON.parse(userData);
+    if (Token) {
       loadUserInfo();
+      setUserId(data._id);
     } else {
       history.push("/login");
     }
-  });
+  }, [userId]);
 
   return (
     <>

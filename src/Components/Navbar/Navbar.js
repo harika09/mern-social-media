@@ -7,7 +7,6 @@ function Navbar() {
   const [click, setClick] = useState(false);
 
   const navActive = () => setClick(!click);
-  const hideNav = () => setClick(false);
 
   return (
     <div className="nav-container">
