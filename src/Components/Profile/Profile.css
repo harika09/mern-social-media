@@ -20,6 +20,7 @@
   cursor: pointer;
   float: right;
   border: 1px solid #cccc;
+  clip-path: circle();
 }
 
 .profile-name {
@@ -58,11 +59,6 @@
 
 .profile-other-info strong {
   margin-right: 10px;
-}
-
-.profile-avatar img {
-  position: relative;
-  z-index: -1;
 }
 
 /* Loading Animation */

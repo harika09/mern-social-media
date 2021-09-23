@@ -22,7 +22,7 @@ function CreatePost() {
       setError("Empty Fields");
     } else {
       Axios.post(
-        "http://localhost:4000/post/newPost",
+        "https://mern-social-konek.herokuapp.com/post/newPost",
 
         formData,
 

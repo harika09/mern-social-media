@@ -42,7 +42,7 @@ function Profile() {
     history.push("/login");
   };
 
-  const updateProfile = (e) => {
+  const updateProfile = async (e) => {
     e.preventDefault();
 
     const { username, firstName, lastName, email } = state;
@@ -53,28 +53,27 @@ function Profile() {
     formData.append("username", username);
     formData.append("firstName", firstName);
     formData.append("lastName", lastName);
-
-    Axios.put(
-      "https://mern-social-konek.herokuapp.com/post/profile/update",
-      formData,
-      {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("Token"),
-        },
-      }
-    ).then((response) => {
-      if (response.data.error) {
-        setError(response.data.error);
-      } else {
-        console.log(response);
-        setError(response.data.success);
-
-        setTimeout(() => {
+    try {
+      Axios.put(
+        "https://mern-social-konek.herokuapp.com/post/profile/update",
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("Token"),
+          },
+        }
+      ).then((response) => {
+        if (response.data.error) {
+          setError(response.data.error);
+        } else {
+          /* Success update */
+          setError(response.data.success);
           setIsModal(false);
-          loadUserInfo();
-        }, 1000);
-      }
-    });
+        }
+      });
+    } catch (err) {
+      setError("Something went wrong! Please Refresh");
+    }
   };
 
   useEffect(() => {

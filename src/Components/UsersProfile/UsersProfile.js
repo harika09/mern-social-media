@@ -71,7 +71,7 @@ function UsersProfile() {
                     </div>
 
                     <div className="profile-btn">
-                      {profile._id != userId ? (
+                      {profile._id !== userId ? (
                         <button
                           onClick={() => {
                             btnFollow();
