@@ -52,6 +52,7 @@
 i:focus,
 i:active {
   outline: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .fa-heart {
@@ -65,6 +66,8 @@ i:active {
 
 .post-action-btn button {
   font-size: 1rem;
+  color: #000;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 button {
@@ -72,11 +75,14 @@ button {
   outline: none;
   background-color: transparent;
   cursor: pointer;
+  color: #000;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .post-action-btn button button:active,
 .post-action-btn button button:focus {
   border: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .profile-line {
