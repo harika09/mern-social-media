@@ -156,15 +156,21 @@ function Profile() {
               </div>
 
               <div className="bottom-container">
-                {post.map((posts, key) => {
-                  return (
-                    <div key={posts._id} className="posts-content">
-                      <Link to={`/view/post/${posts._id}`}>
-                        <img src={posts.image} alt="" />
-                      </Link>
-                    </div>
-                  );
-                })}
+                {post.length === 0 ? (
+                  <div className="post-empty">
+                    <span>No Post</span>
+                  </div>
+                ) : (
+                  post.map((posts, key) => {
+                    return (
+                      <div key={posts._id} className="posts-content">
+                        <Link to={`/view/post/${posts._id}`}>
+                          <img src={posts.image} alt="" />
+                        </Link>
+                      </div>
+                    );
+                  })
+                )}
               </div>
             </div>
           )}

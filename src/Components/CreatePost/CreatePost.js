@@ -16,13 +16,12 @@ function CreatePost() {
   /* Disabling  Loading  animation */
   setTimeout(() => {
     setPageLoad(false);
-  }, 1000);
+  }, 1500);
 
   const submitPost = (e) => {
     e.preventDefault();
 
     /* Enable Loading animation */
-    setPageLoad(true);
 
     const formData = new FormData();
     formData.append("image", image);
@@ -31,9 +30,7 @@ function CreatePost() {
 
     if (!title.trim() || !content.trim() || !image) {
       setError("Empty Fields");
-      setTimeout(() => {
-        setPageLoad(false);
-      }, 1000);
+      setPageLoad(true);
     } else {
       Axios.post(
         "https://mern-social-konek.herokuapp.com/post/newPost",
@@ -50,6 +47,7 @@ function CreatePost() {
         if (response.data.error) {
           setError(response.data.error);
         } else {
+          setPageLoad(true);
           history.push("/");
         }
       });
@@ -104,7 +102,7 @@ function CreatePost() {
                   <i className="fas fa-image"></i>
                 </label>
 
-                <input type="submit" value="Post" onClick={() => submitPost} />
+                <input type="submit" value="Post" onSubmit={submitPost} />
               </div>
             </form>
           )}

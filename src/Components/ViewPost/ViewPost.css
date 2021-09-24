@@ -2,7 +2,7 @@
   padding-top: 90px;
 }
 .view-post-card {
-  max-width: 650px;
+  max-width: 550px;
   margin: 20px auto;
   border: 1px solid #cccc;
 }
@@ -113,13 +113,24 @@
   border: 1px solid #cccc;
 }
 
+.omments-list {
+  position: relative;
+}
+
 .comments-user-list {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 10px;
   padding: 5px;
   border: 1px solid #cccc;
   margin-bottom: 10px;
+}
+
+.comment-left-sction {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 
 .comments-user-image img {
@@ -147,4 +158,8 @@
 
 .comments-user-info span {
   font-size: 0.5rem;
+}
+
+.comment-right-section i {
+  cursor: pointer;
 }

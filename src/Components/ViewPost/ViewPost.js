@@ -94,11 +94,34 @@ function ViewPost({ userID }) {
           },
         }
       ).then((response) => {
-        console.log(response);
         setComment("");
         getPost();
       });
     }
+  };
+
+  const deleteComment = async (id) => {
+    const requestedID = id;
+
+    await Axios.delete(
+      `http://localhost:4000/post/delete/comment/${requestedID}`,
+
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      if (response.data.success) {
+        getPost();
+        setLoadComment(
+          loadComment.filter((value) => {
+            return value._id !== id;
+          })
+        );
+      }
+    });
   };
 
   const deletePost = async (id) => {
@@ -176,6 +199,7 @@ function ViewPost({ userID }) {
                   ""
                 )}
               </div>
+              <hr className="profile-line" />
               <div className="top-post-image">
                 <img src={post.image} alt={post.title} />
               </div>
@@ -260,30 +284,50 @@ function ViewPost({ userID }) {
             onRequestClose={() => setIsModal(false)}
             className="comments-modal"
           >
-            {loadComment.map((value, key) => {
-              return (
-                <div key={value._id} className="comments-container">
-                  <div className="comments-list">
-                    <div className="comments-user-list">
-                      <div className="comments-user-image">
-                        <Link to={`/view/profile/${value.userId}`}>
-                          <img src={value.avatar} alt={value.username} />
-                        </Link>
-                      </div>
+            {loadComment.length === 0 ? (
+              <div className="comment-empty">
+                <span>No Comment</span>
+              </div>
+            ) : (
+              loadComment.map((value, key) => {
+                return (
+                  <div key={value._id} className="comments-container">
+                    <div className="comments-list">
+                      <div className="comments-user-list">
+                        <div className="comment-left-sction">
+                          <div className="comments-user-image">
+                            <Link to={`/view/profile/${value.userId}`}>
+                              <img src={value.avatar} alt={value.username} />
+                            </Link>
+                          </div>
 
-                      <div className="comments-user-info">
-                        <Link to={`/view/profile/${post.userId}`}>
-                          <h3>{value.username}</h3>
-                        </Link>
+                          <div className="comments-user-info">
+                            <Link to={`/view/profile/${post.userId}`}>
+                              <h3>{value.username}</h3>
+                            </Link>
 
-                        <p>{value.comment}</p>
-                        <span>{moment(value.createdAt).fromNow()}</span>
+                            <p>{value.comment}</p>
+                            <span>{moment(value.createdAt).fromNow()}</span>
+                          </div>
+                        </div>
+                        {value.userId === userId ? (
+                          <div className="comment-right-section">
+                            <i
+                              onClick={() => {
+                                deleteComment(value._id);
+                              }}
+                              className="far fa-times-circle"
+                            ></i>
+                          </div>
+                        ) : (
+                          ""
+                        )}
                       </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </Modal>
 
           <Modal

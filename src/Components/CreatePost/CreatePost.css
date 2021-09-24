@@ -8,3 +8,7 @@
 .fa-image {
   font-size: 3rem;
 }
+
+.create-post-form input[type="text"] {
+  padding: 15px 10px;
+}

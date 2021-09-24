@@ -86,11 +86,11 @@ function Login() {
 
               <div className="login-low-content">
                 <div className="reset">
-                  <Link to="#">Reset Password</Link>
+                  <Link to="#">Forgot Password ?</Link>
                 </div>
 
                 <div className="register">
-                  <Link to="/register">Register?</Link>
+                  <Link to="/register">Register</Link>
                 </div>
               </div>
             </div>
