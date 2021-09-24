@@ -1,0 +1,22 @@
+.error-404-container {
+  padding-top: 90px;
+}
+.error-info {
+  text-align: center;
+}
+.error-info img {
+  width: 100%;
+  max-width: 850px;
+  display: block;
+  margin: 0 auto;
+}
+
+.error-info p {
+  margin-bottom: 30px;
+}
+.back-home {
+  margin-top: 300px;
+  padding: 15px 15px;
+  background-color: #1e3163;
+  color: #fff;
+}

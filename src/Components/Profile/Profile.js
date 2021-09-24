@@ -30,7 +30,7 @@ function Profile() {
   const loadUserInfo = async () => {
     const userInfo = await Axios.get(
       /* http://localhost:4000/ */ /* https://mern-social-konek.herokuapp.com */
-      `https://mern-social-konek.herokuapp.com/auth/profile/${userId}`,
+      `http://localhost:4000/auth/profile`,
       headers
     );
 
@@ -68,12 +68,12 @@ function Profile() {
     ).then((response) => {
       if (response.data.error) {
         setError(response.data.error);
-      } /* Success update */
-      setError(response.data.success);
-      setTimeout(() => {
+      } else {
+        /* Success update */
+        setError(response.data.success);
         loadUserInfo();
         setIsModal(false);
-      }, 1000);
+      }
     });
   };
 

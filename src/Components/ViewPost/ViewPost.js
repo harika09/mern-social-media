@@ -104,7 +104,7 @@ function ViewPost({ userID }) {
     const requestedID = id;
 
     await Axios.delete(
-      `http://localhost:4000/post/delete/comment/${requestedID}`,
+      `https://mern-social-konek.herokuapp.com/post/delete/comment/${requestedID}`,
 
       {
         headers: {

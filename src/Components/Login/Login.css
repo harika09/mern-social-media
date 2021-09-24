@@ -1,16 +1,22 @@
-a {
-  text-decoration: none;
-  color: #000;
-}
-.login-content {
+.login-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   justify-content: center;
+}
+
+.user-login-form {
+  width: 100%;
   max-width: 550px;
   margin: 0 auto;
   background-color: #ffff;
-  padding: 10px;
+  padding: 35px 25px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
+}
+
+input {
+  border: 1px solid #ccc;
 }
 
 input[type="email"],
@@ -93,6 +99,10 @@ form span {
 }
 
 @media screen and (max-width: 600px) {
+  .login-low-content a {
+    font-size: 0.9rem;
+  }
+
   .login-low-content a {
     font-size: 0.9rem;
   }

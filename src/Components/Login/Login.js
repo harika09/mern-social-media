@@ -48,7 +48,7 @@ function Login() {
             <BounceLoader loading color="#e98580" />
           </div>
         ) : (
-          <div>
+          <div className="user-login-form">
             <div className="login-logo">
               <img src={Logo} alt="Logo" />
             </div>

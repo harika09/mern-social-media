@@ -54,7 +54,7 @@ function Register() {
             <BounceLoader loading color="#e98580" />
           </div>
         ) : (
-          <div>
+          <div className="register-user-form">
             <div className="register-logo">
               <img src={Logo} alt="Logo" />
             </div>

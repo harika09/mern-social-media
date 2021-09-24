@@ -1,22 +1,25 @@
-a {
-  text-decoration: none;
-  color: #000;
+.register-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+}
+
+.register-user-form {
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
+  background-color: #ffff;
+  padding: 35px 25px;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 2px rgb(0 0 0 / 10%);
 }
 
 .form-name {
   display: flex;
   gap: 20px;
 }
-.register-content {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  justify-content: center;
-  max-width: 550px;
-  margin: 0 auto;
-  background-color: #ffff;
-  padding: 10px;
-}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
@@ -104,5 +107,17 @@ input[type="submit"]:hover {
   input[type="email"],
   input[type="password"] {
     font-size: 0.9rem;
+  }
+
+  .register-user-form {
+    margin: 50px 0;
+  }
+
+  .form-name {
+    display: block;
+  }
+
+  .have-account a {
+    font-size: 0.8rem;
   }
 }

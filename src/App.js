@@ -11,6 +11,7 @@ import Register from "./Components/Register/Register";
 import Profile from "./Components/Profile/Profile";
 import UsersProfile from "./Components/UsersProfile/UsersProfile";
 import ViewPost from "./Components/ViewPost/ViewPost";
+import Page404 from "./Components/Page404/Page404";
 
 Modal.setAppElement("#root");
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/post" component={CreatePost} />
         <Route path="/view/profile/:id" component={UsersProfile} />
         <Route path="/view/post/:id" component={ViewPost} />
+        <Route component={Page404} />
       </Switch>
     </Router>
   );

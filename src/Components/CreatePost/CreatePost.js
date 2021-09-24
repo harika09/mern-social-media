@@ -97,7 +97,7 @@ function CreatePost() {
                   <input
                     type="file"
                     onChange={(e) => setImage(e.target.files[0])}
-                    accept="image/jpeg, image/png"
+                    accept="image/png, image/gif, image/jpeg"
                   />
                   <i className="fas fa-image"></i>
                 </label>

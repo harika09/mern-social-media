@@ -7,8 +7,18 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+a {
+  text-decoration: none;
+  color: #000;
+}
+
 :focus {
   outline: none !important;
+}
+
+input {
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .bd-container {
