@@ -24,6 +24,7 @@ li {
 .navbar-menu {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .navbar-menu li {
@@ -36,12 +37,17 @@ li {
 }
 
 .nav-logo img {
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
 }
 
 .nav-list i {
   margin-right: 5px;
+}
+
+.search-users input[type="text"] {
+  margin-top: 5px;
+  padding: 10px 45px;
 }
 
 @media screen and (max-width: 680px) {

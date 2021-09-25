@@ -151,6 +151,8 @@ input[type="submit"] {
 /* Follow Btn */
 .profile-btn .btn-follow {
   background-color: #0095f6;
+  font-size: 1.1rem;
+  padding: 10px 25px;
   color: #fff;
   border-radius: 4px;
 }

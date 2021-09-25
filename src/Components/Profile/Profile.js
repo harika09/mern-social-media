@@ -30,7 +30,7 @@ function Profile() {
   const loadUserInfo = async () => {
     const userInfo = await Axios.get(
       /* http://localhost:4000/ */ /* https://mern-social-konek.herokuapp.com */
-      `http://localhost:4000/auth/profile`,
+      `https://mern-social-konek.herokuapp.com/auth/profile`,
       headers
     );
 
@@ -139,18 +139,29 @@ function Profile() {
                     </div>
 
                     <div className="profile-post">
-                      <strong>{profile.likes.length}</strong>
+                      <strong>{profile.followers.length}</strong>
                       <span>
-                        {profile.likes.length <= 1 ? "Like" : "Likes"}
+                        {profile.followers.length <= 1
+                          ? "Follower"
+                          : "Followers"}
                       </span>
                     </div>
 
                     <div className="profile-post">
+                      <strong>{profile.following.length}</strong>
+                      <span>
+                        {profile.comments.following <= 1
+                          ? "Following"
+                          : "Following"}
+                      </span>
+                    </div>
+
+                    {/* <div className="profile-post">
                       <strong>{profile.comments.length}</strong>
                       <span>
                         {profile.comments.length <= 1 ? "Comment" : "Comments"}
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

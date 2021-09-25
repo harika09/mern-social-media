@@ -6,8 +6,8 @@
 }
 
 .user-login-form {
-  width: 100%;
-  max-width: 550px;
+  max-width: 100%;
+  width: 560px;
   margin: 0 auto;
   background-color: #ffff;
   padding: 35px 25px;

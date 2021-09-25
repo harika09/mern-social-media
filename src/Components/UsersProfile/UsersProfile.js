@@ -22,17 +22,30 @@ function UsersProfile() {
   const loadProfile = async () => {
     const profile = await Axios.get(
       /* http://localhost:4000/ */ /* https://mern-social-konek.herokuapp.com */
-      `https://mern-social-konek.herokuapp.com/auth/view/profile/${params.id}`,
+      `http://localhost:4000/auth/view/profile/${params.id}`,
       headers
     );
 
     setProfile(profile.data.user);
     setPost(profile.data.post);
     setLoading(false);
-    console.log(profile);
   };
 
   const btnFollow = (id) => {
+    Axios.put(
+      `http://localhost:4000/auth/follow`,
+      { requestedUserId: id },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      loadProfile();
+    });
+  };
+
+  const btnUnFollow = (id) => {
     Axios.put(
       `http://localhost:4000/auth/unfollow`,
       { requestedUserId: id },
@@ -42,7 +55,7 @@ function UsersProfile() {
         },
       }
     ).then((response) => {
-      console.log(response);
+      loadProfile();
     });
   };
 
@@ -81,20 +94,37 @@ function UsersProfile() {
                       <strong>{profile.username}</strong>
                     </div>
 
-                    <div className="profile-btn">
-                      {profile._id !== userId ? (
-                        <button
-                          onClick={() => {
-                            btnFollow(profile._id);
-                          }}
-                          className="btn-follow"
-                        >
-                          Follow
-                        </button>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                    {profile.followers.includes(userId) ? (
+                      <div className="profile-btn">
+                        {profile._id !== userId ? (
+                          <button
+                            onClick={() => {
+                              btnUnFollow(profile._id);
+                            }}
+                            className="btn-follow"
+                          >
+                            Following
+                          </button>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    ) : (
+                      <div className="profile-btn">
+                        {profile._id !== userId ? (
+                          <button
+                            onClick={() => {
+                              btnFollow(profile._id);
+                            }}
+                            className="btn-follow"
+                          >
+                            Follow
+                          </button>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                    )}
                   </div>
 
                   <div className="profile-other-info">
