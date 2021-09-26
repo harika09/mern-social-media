@@ -270,9 +270,18 @@ function Home() {
                 onRequestClose={() => setIsModal(false)}
                 className="modal"
               >
-                <button onClick={() => btnDelete(postId)}>Delete</button>
+                <button onClick={() => btnDelete(postId)}>
+                  {" "}
+                  <i className="fas fa-trash"></i>Delete
+                </button>
                 <hr className="profile-line" />
-                <button>Edit</button>
+
+                <Link to={`/edit/post/${postId}`}>
+                  <button>
+                    {" "}
+                    <i className="far fa-edit"></i>Edit
+                  </button>
+                </Link>
               </Modal>
             </div>
           )}

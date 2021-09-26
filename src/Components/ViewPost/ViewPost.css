@@ -20,14 +20,14 @@
 }
 
 .top-post-profile-image img {
-  width: 100%;
-  max-width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
+  position: relative;
+  overflow: hidden;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 50%;
-  cursor: pointer;
   border: 1px solid #cccc;
+  clip-path: circle();
 }
 
 .top-post-image img {
@@ -110,7 +110,7 @@
   bottom: auto;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  width: 380px;
+  width: 450px;
   max-width: 100%;
   padding: 15px;
   background-color: #ffff;
@@ -128,7 +128,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  padding: 5px;
+  padding: 8px;
   border: 1px solid #cccc;
   margin-bottom: 10px;
 }
@@ -140,14 +140,14 @@
 }
 
 .comments-user-image img {
-  width: 100%;
-  max-width: 45px;
+  width: 45px;
   height: 45px;
+  position: relative;
+  overflow: hidden;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 50%;
-  cursor: pointer;
   border: 1px solid #cccc;
+  clip-path: circle();
 }
 
 .comments-user-info {

@@ -16,6 +16,19 @@ function Profile() {
   const [state, setState] = useState({});
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
+  const [file, setFile] = useState("");
+  const [followModal, setFollowModal] = useState();
+
+  const fileHandler = (e) => {
+    /* Preview Image */
+    let reader = new FileReader();
+    reader.onload = function (e) {
+      setFile(e.target.result);
+    };
+
+    reader.readAsDataURL(e.target.files[0]);
+    setImage(e.target.files[0]);
+  };
 
   const showEditModal = () => {
     setIsModal(!isModal);
@@ -37,6 +50,8 @@ function Profile() {
     setProfile(userInfo.data.user);
     setPost(userInfo.data.post);
     setLoading(false);
+    setFile(userInfo.data.user.image);
+    // setFile(profile.data.image);
   };
 
   const bntLogout = () => {
@@ -47,7 +62,7 @@ function Profile() {
   const updateProfile = async (e) => {
     e.preventDefault();
 
-    const { username, firstName, lastName, email } = state;
+    const { username, firstName, lastName } = state;
 
     const formData = new FormData();
 
@@ -62,6 +77,7 @@ function Profile() {
       formData,
       {
         headers: {
+          "Content-Type": "application/json",
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
@@ -198,11 +214,14 @@ function Profile() {
               )}
 
               <form onSubmit={updateProfile}>
+                <img src={file} alt="upload" className="upload-image" />
+
                 <p className="add-image">Click to upload image</p>
                 <label>
                   <input
                     type="file"
-                    onChange={(e) => setImage(e.target.files[0])}
+                    onChange={fileHandler}
+                    // onChange={(e) => setImage(e.target.files[0])}
                     accept="image/jpeg, image/png"
                   />
                   <i className="fas fa-camera"></i>

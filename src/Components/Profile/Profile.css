@@ -10,14 +10,12 @@
 }
 
 .profile-top-content img {
-  width: 100%;
-  max-width: 150px;
-  height: 150px;
+  width: 130px;
+  height: 130px;
+  position: relative;
+  overflow: hidden;
   border-radius: 50%;
   object-fit: cover;
-  object-position: 50% 50%;
-  cursor: pointer;
-  float: right;
   border: 1px solid #cccc;
   clip-path: circle();
 }
@@ -85,10 +83,9 @@ button {
 .posts-content img {
   width: 100%;
   width: 300px;
-  height: 350px;
+  height: 250px;
   object-fit: cover;
   object-position: 50% 50%;
-
   display: block;
   margin: 0 auto;
 }
@@ -123,6 +120,17 @@ button {
 }
 
 /*Upload Image*/
+
+.upload-image {
+  width: 130px;
+  height: 130px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #cccc;
+  clip-path: circle();
+}
 
 label input {
   height: 0;

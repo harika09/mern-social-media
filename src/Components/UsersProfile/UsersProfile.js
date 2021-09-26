@@ -22,7 +22,7 @@ function UsersProfile() {
   const loadProfile = async () => {
     const profile = await Axios.get(
       /* http://localhost:4000/ */ /* https://mern-social-konek.herokuapp.com */
-      `http://localhost:4000/auth/view/profile/${params.id}`,
+      `https://mern-social-konek.herokuapp.com/auth/view/profile/${params.id}`,
       headers
     );
 
@@ -33,7 +33,7 @@ function UsersProfile() {
 
   const btnFollow = (id) => {
     Axios.put(
-      `http://localhost:4000/auth/follow`,
+      `https://mern-social-konek.herokuapp.com/auth/follow`,
       { requestedUserId: id },
       {
         headers: {
@@ -47,7 +47,7 @@ function UsersProfile() {
 
   const btnUnFollow = (id) => {
     Axios.put(
-      `http://localhost:4000/auth/unfollow`,
+      `https://mern-social-konek.herokuapp.com/auth/unfollow`,
       { requestedUserId: id },
       {
         headers: {
@@ -134,16 +134,20 @@ function UsersProfile() {
                     </div>
 
                     <div className="profile-post">
-                      <strong>{profile.likes.length}</strong>
+                      <strong>{profile.followers.length}</strong>
                       <span>
-                        {profile.likes.length <= 1 ? "Like" : "Likes"}
+                        {profile.followers.length <= 1
+                          ? "Follower"
+                          : "Followers"}
                       </span>
                     </div>
 
                     <div className="profile-post">
-                      <strong>{profile.comments.length}</strong>
+                      <strong>{profile.following.length}</strong>
                       <span>
-                        {profile.comments.length <= 1 ? "Comment" : "Comments"}
+                        {profile.comments.following <= 1
+                          ? "Following"
+                          : "Following"}
                       </span>
                     </div>
                   </div>
