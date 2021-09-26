@@ -17,9 +17,9 @@ function Home() {
   const [isModal, setIsModal] = useState(false);
   const [postId, setPostId] = useState({});
   const [post, setPost] = useState([]);
-  /* Check is userId is in the post like Array */
-  const [userId, setUserId] = useState("");
   const [maxPage, setMaxPage] = useState("");
+
+  const [userId, setUserId] = useState("");
 
   const showOptions = () => {
     setIsModal(!isModal);
@@ -265,26 +265,27 @@ function Home() {
                 );
               })}
 
+              {/* Post Action modal Here */}
               <Modal
                 isOpen={isModal}
                 onRequestClose={() => setIsModal(false)}
                 className="modal"
               >
                 <button onClick={() => btnDelete(postId)}>
-                  {" "}
                   <i className="fas fa-trash"></i>Delete
                 </button>
                 <hr className="profile-line" />
 
                 <Link to={`/edit/post/${postId}`}>
                   <button>
-                    {" "}
                     <i className="far fa-edit"></i>Edit
                   </button>
                 </Link>
               </Modal>
             </div>
           )}
+
+          {/* Pagination Loading Animation Here */}
           {isloading && (
             <BeatLoader
               className="pagination-animation"
