@@ -28,7 +28,7 @@ function Navbar() {
 
   const loadUsers = async () => {
     const users = await Axios.get(
-      "http://localhost:4000/auth/search/users",
+      "https://mern-social-konek.herokuapp.com/auth/search/users",
       headers
     );
     console.log(users);
@@ -66,7 +66,13 @@ function Navbar() {
 
         <ul className={click ? "navbar-menu active" : "navbar-menu"}>
           <li className="nav-list search-users">
-            <i className="fas fa-search" onClick={showSearch}></i>
+            <i
+              className="fas fa-search"
+              onClick={() => {
+                showSearch();
+                setClick(false);
+              }}
+            ></i>
           </li>
           <li className="nav-list">
             <i className="fas fa-home"></i>
@@ -114,33 +120,30 @@ function Navbar() {
                     return users;
                   }
                 })
-                .map((users) => {
+                .map((users, key) => {
                   return (
-                    <div className="search-user-info">
+                    <div key={users._id} className="search-user-info">
                       <div className="search-user-img">
-                        <Link
-                          to={
+                        <a
+                          href={
                             users._id !== userId
                               ? `/view/profile/${users._id}`
                               : `/profile`
                           }
-                          onClick={() => {
-                            showSearch();
-                          }}
                         >
                           <img src={users.image} alt={users.username} />
-                        </Link>
+                        </a>
                       </div>
                       <div className="search-user-name">
-                        <Link
-                          to={
+                        <a
+                          href={
                             users._id !== userId
                               ? `/view/profile/${users._id}`
                               : `/profile`
                           }
                         >
                           <span>{users.username}</span>
-                        </Link>
+                        </a>
                       </div>
                     </div>
                   );

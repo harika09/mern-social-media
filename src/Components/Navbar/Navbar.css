@@ -137,4 +137,9 @@ li {
     -webkit-transform: rotate(45deg) translate(-8px, -8px);
     transform: rotate(45deg) translate(-8px, -8px);
   }
+
+  .search-modal {
+    width: 450px;
+    height: 450px;
+  }
 }
