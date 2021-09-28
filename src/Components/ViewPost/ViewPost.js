@@ -1,6 +1,6 @@
 import { Link, useHistory, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
 import Modal from "react-modal";
 import moment from "moment";
@@ -164,7 +164,7 @@ function ViewPost({ userID }) {
         <div className="view-post-content bd-container">
           {isloading ? (
             <div className="loading-animation">
-              <BounceLoader loading color="#e98580" />
+              <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
             <div className="view-post-card">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
 import Axios from "axios";
 import "./CreatePost.css";
@@ -67,7 +67,7 @@ function CreatePost() {
         <div className="create-post-content bd-container">
           {pageLoad ? (
             <div className="loading-animation">
-              <BounceLoader loading color="#e98580" />
+              <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
             <form onSubmit={submitPost}>

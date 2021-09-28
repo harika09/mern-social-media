@@ -31,7 +31,7 @@ function Navbar() {
       "https://mern-social-konek.herokuapp.com/auth/search/users",
       headers
     );
-    console.log(users);
+
     setUserList(users.data);
   };
 
@@ -76,17 +76,41 @@ function Navbar() {
           </li>
           <li className="nav-list">
             <i className="fas fa-home"></i>
-            <Link to="/">Home</Link>
+            <Link
+              to="/"
+              onClick={() => {
+                showSearch();
+                setClick(false);
+              }}
+            >
+              Home
+            </Link>
           </li>
 
           <li className="nav-list">
             <i className="fas fa-plus-circle"></i>
-            <Link to="/post">Create Post</Link>
+            <Link
+              to="/post"
+              onClick={() => {
+                showSearch();
+                setClick(false);
+              }}
+            >
+              Create Post
+            </Link>
           </li>
 
           <li className="nav-list">
             <i className="fas fa-user-circle"></i>
-            <Link to="/profile">Profile</Link>
+            <Link
+              to="/profile"
+              onClick={() => {
+                showSearch();
+                setClick(false);
+              }}
+            >
+              Profile
+            </Link>
           </li>
         </ul>
       </div>
@@ -131,7 +155,13 @@ function Navbar() {
                               : `/profile`
                           }
                         >
-                          <img src={users.image} alt={users.username} />
+                          <img
+                            src={users.image}
+                            alt={users.username}
+                            onClick={() => {
+                              setSearchModal(false);
+                            }}
+                          />
                         </a>
                       </div>
                       <div className="search-user-name">
@@ -142,7 +172,13 @@ function Navbar() {
                               : `/profile`
                           }
                         >
-                          <span>{users.username}</span>
+                          <span
+                            onClick={() => {
+                              setSearchModal(false);
+                            }}
+                          >
+                            {users.username}
+                          </span>
                         </a>
                       </div>
                     </div>

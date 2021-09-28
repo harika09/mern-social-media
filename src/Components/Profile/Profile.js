@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
 import Modal from "react-modal";
 import Axios from "axios";
@@ -17,7 +17,7 @@ function Profile() {
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
-  const [followModal, setFollowModal] = useState();
+  const [followModal, setFollowModal] = useState(false);
 
   const fileHandler = (e) => {
     /* Preview Image */
@@ -32,6 +32,10 @@ function Profile() {
 
   const showEditModal = () => {
     setIsModal(!isModal);
+  };
+
+  const showFollow = () => {
+    setFollowModal(!followModal);
   };
 
   const headers = {
@@ -51,6 +55,7 @@ function Profile() {
     setPost(userInfo.data.post);
     setLoading(false);
     setFile(userInfo.data.user.image);
+
     // setFile(profile.data.image);
   };
 
@@ -112,7 +117,7 @@ function Profile() {
         <div className="profile-content bd-container">
           {isloading ? (
             <div className="loading-animation">
-              <BounceLoader loading color="#e98580" />
+              <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
             <div className="profile-wrapper">
@@ -165,19 +170,16 @@ function Profile() {
 
                     <div className="profile-post">
                       <strong>{profile.following.length}</strong>
-                      <span>
-                        {profile.comments.following <= 1
+                      <button onClick={showFollow}>
+                        <span>
+                          {/* {profile.following.length}
+                        {/* {profile.comments.following <= 1
                           ? "Following"
-                          : "Following"}
-                      </span>
+                          : "Following"} */}
+                          Following
+                        </span>
+                      </button>
                     </div>
-
-                    {/* <div className="profile-post">
-                      <strong>{profile.comments.length}</strong>
-                      <span>
-                        {profile.comments.length <= 1 ? "Comment" : "Comments"}
-                      </span>
-                    </div> */}
                   </div>
                 </div>
               </div>
@@ -273,6 +275,14 @@ function Profile() {
           ) : (
             ""
           )}
+
+          <Modal
+            isOpen={followModal}
+            onRequestClose={() => setFollowModal(false)}
+            className="edit-modal"
+          >
+            Following
+          </Modal>
         </div>
       </div>
     </>

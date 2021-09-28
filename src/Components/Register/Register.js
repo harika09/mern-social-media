@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../../Assets/images/logo.png";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import Axios from "axios";
 import "./Register.css";
 
@@ -20,7 +20,7 @@ function Register() {
 
     setLoading(true);
 
-    Axios.post(`https://mern-social-konek.herokuapp.com/auth/register`, {
+    Axios.post(`http://localhost:4000/auth/register`, {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -51,7 +51,7 @@ function Register() {
       <div className="register-content bd-container">
         {isloading ? (
           <div className="loading-animation">
-            <BounceLoader loading color="#e98580" />
+            <HashLoader loading color="#4B5A82" size={75} />
           </div>
         ) : (
           <div className="register-user-form">

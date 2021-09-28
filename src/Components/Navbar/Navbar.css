@@ -83,6 +83,12 @@ li {
   border-radius: 50%;
   border: 1px solid #ccc;
   clip-path: circle();
+  object-fit: cover;
+}
+
+.search-modal {
+  width: 550px;
+  height: 450px;
 }
 
 @media screen and (max-width: 680px) {
@@ -139,7 +145,7 @@ li {
   }
 
   .search-modal {
-    width: 450px;
+    width: 90%;
     height: 450px;
   }
 }

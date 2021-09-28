@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../../Assets/images/logo.png";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
+import Modal from "react-modal";
 import Axios from "axios";
 import "./Login.css";
 
@@ -11,6 +12,12 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isloading, setLoading] = useState(false);
+  const [isModal, setIsModal] = useState(false);
+  const [recoverEmail, setRecoverEmail] = useState("");
+
+  const showModal = () => {
+    setIsModal(!isModal);
+  };
 
   const login = (e) => {
     e.preventDefault();
@@ -34,6 +41,16 @@ function Login() {
     });
   };
 
+  const btnRecover = () => {
+    Axios.post("http://localhost:4000/auth/reset-password", {
+      email: recoverEmail,
+    }).then((response) => {
+      setRecoverEmail("");
+      setIsModal(false);
+      setError(response.data.success);
+    });
+  };
+
   useEffect(() => {
     if (localStorage.getItem("Token")) {
       history.push("/");
@@ -45,7 +62,7 @@ function Login() {
       <div className="login-content bd-container">
         {isloading ? (
           <div className="loading-animation">
-            <BounceLoader loading color="#e98580" />
+            <HashLoader loading color="#4B5A82" size={75} />
           </div>
         ) : (
           <div className="user-login-form">
@@ -86,7 +103,7 @@ function Login() {
 
               <div className="login-low-content">
                 <div className="reset">
-                  <Link to="#">Forgot Password ?</Link>
+                  <button onClick={showModal}>Forgot Password ?</button>
                 </div>
 
                 <div className="register">
@@ -96,6 +113,29 @@ function Login() {
             </div>
           </div>
         )}
+
+        <Modal
+          isOpen={isModal}
+          onRequestClose={() => setIsModal(false)}
+          className="edit-modal"
+        >
+          <div className="recovery-options">
+            <div className="recover-password">
+              <input
+                type="email"
+                placeholder="Enter Email"
+                value={recoverEmail}
+                onChange={(e) => {
+                  setRecoverEmail(e.target.value);
+                }}
+              />
+
+              <button className="btn-reset" onClick={btnRecover}>
+                Reset Password
+              </button>
+            </div>
+          </div>
+        </Modal>
       </div>
     </div>
   );

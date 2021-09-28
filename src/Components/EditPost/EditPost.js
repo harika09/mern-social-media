@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
 import Axios from "axios";
 import "./EditPost.css";
@@ -34,7 +34,7 @@ function EditPost() {
 
     Axios.put(
       /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
-      `http://localhost:4000/post/update/${params.id}`,
+      `https://mern-social-konek.herokuapp.com/post/update/${params.id}`,
       formData,
       {
         headers: {
@@ -50,7 +50,7 @@ function EditPost() {
 
   const loadData = async () => {
     const data = await Axios.get(
-      `http://localhost:4000/post/view/${params.id}`,
+      `https://mern-social-konek.herokuapp.com/post/view/${params.id}`,
       headers
     );
 
@@ -75,17 +75,17 @@ function EditPost() {
         <div className="edit-post-content">
           {pageLoad ? (
             <div className="loading-animation">
-              <BounceLoader loading color="#e98580" />
+              <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
-            <div className="edit-post-form">
+            <div className="edit-form">
               <form onSubmit={updatePost}>
                 {error && (
                   <div className="error">
                     <p>{error}</p>
                   </div>
                 )}
-                <div className="create-post-form">
+                <div className="edit-post-form">
                   <label htmlFor="title">Title</label>
                   <input
                     type="text"

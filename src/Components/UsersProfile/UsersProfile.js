@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import Axios from "axios";
 import "../Profile/Profile.css";
 
@@ -12,6 +12,7 @@ function UsersProfile() {
   const [isloading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
   const [userId, setUserId] = useState("");
+  const [id, setId] = useState(params.id);
 
   const headers = {
     headers: {
@@ -22,13 +23,14 @@ function UsersProfile() {
   const loadProfile = async () => {
     const profile = await Axios.get(
       /* http://localhost:4000/ */ /* https://mern-social-konek.herokuapp.com */
-      `https://mern-social-konek.herokuapp.com/auth/view/profile/${params.id}`,
+      `https://mern-social-konek.herokuapp.com/auth/view/profile/${id}`,
       headers
     );
 
     setProfile(profile.data.user);
     setPost(profile.data.post);
     setLoading(false);
+    console.log(profile);
   };
 
   const btnFollow = (id) => {
@@ -70,7 +72,7 @@ function UsersProfile() {
     } else {
       history.push("/login");
     }
-  }, [userId]);
+  }, [id]);
 
   return (
     <>
@@ -79,7 +81,7 @@ function UsersProfile() {
         <div className="profile-content bd-container">
           {isloading ? (
             <div className="loading-animation">
-              <BounceLoader loading color="#e98580" />
+              <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
             <div className="profile-wrapper">
