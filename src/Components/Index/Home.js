@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { BounceLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 import { BeatLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
 import Modal from "react-modal";
@@ -169,7 +169,7 @@ function Home() {
         <div className="main-content bd-container">
           {pageLoad ? (
             <div className="loading-animation">
-              <BounceLoader loading color="#e98580" />
+              <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
             <div>
