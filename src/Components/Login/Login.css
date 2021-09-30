@@ -97,6 +97,7 @@ form span {
 .login-logo img {
   display: block;
   margin: 0 auto;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 600px) {
@@ -106,5 +107,9 @@ form span {
 
   .login-low-content a {
     font-size: 0.9rem;
+  }
+
+  .login-logo img {
+    width: 75px;
   }
 }

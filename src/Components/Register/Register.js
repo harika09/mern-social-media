@@ -20,7 +20,7 @@ function Register() {
 
     setLoading(true);
 
-    Axios.post(`http://localhost:4000/auth/register`, {
+    Axios.post(`https://mern-social-konek.herokuapp.com/auth/register`, {
       firstName: firstName,
       lastName: lastName,
       username: username,
@@ -74,6 +74,7 @@ function Register() {
                       type="text"
                       placeholder="First Name"
                       value={firstName}
+                      maxLength="30"
                       onChange={(e) => setFirstName(e.target.value)}
                     />
                   </div>
@@ -83,6 +84,7 @@ function Register() {
                     <input
                       type="text"
                       placeholder="Last Name"
+                      maxLength="30"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
@@ -95,6 +97,7 @@ function Register() {
                   <input
                     type="text"
                     placeholder="Enter Username"
+                    maxLength="30"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -107,6 +110,7 @@ function Register() {
                     type="email"
                     placeholder="Enter Emaill Address"
                     value={email}
+                    maxLength="50"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -118,6 +122,7 @@ function Register() {
                     type="password"
                     placeholder="Enter Password"
                     value={password}
+                    maxLength="50"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>

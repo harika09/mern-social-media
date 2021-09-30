@@ -18,21 +18,29 @@ function ResetPassword() {
 
   const updatePass = () => {
     setLoading(true);
-    Axios.put(`http://localhost:4000/auth/update/password`, {
-      token: params.token,
-      password: newPass,
-    }).then((response) => {
-      if (response.data.error) {
-        setLoading(false);
-        setMessage(response.data.error);
-      } else {
-        setMessage(response.data.success);
-        setLoading(true);
-        setTimeout(() => {
-          history.push("/login");
-        }, 1500);
-      }
-    });
+    if (!newPass.trim()) {
+      setMessage("Password is emty");
+      setLoading(false);
+    } else {
+      Axios.put(
+        `https://mern-social-konek.herokuapp.com/auth/update/password`,
+        {
+          token: params.token,
+          password: newPass,
+        }
+      ).then((response) => {
+        if (response.data.error) {
+          setLoading(false);
+          setMessage(response.data.error);
+        } else {
+          setMessage(response.data.success);
+          setLoading(true);
+          setTimeout(() => {
+            history.push("/login");
+          }, 1500);
+        }
+      });
+    }
   };
 
   return (

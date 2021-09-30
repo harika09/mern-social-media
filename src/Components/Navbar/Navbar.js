@@ -50,7 +50,12 @@ function Navbar() {
     <div className="nav-container">
       <div className="nav-content bd-container">
         <div className="nav-logo">
-          <Link to="/">
+          <Link
+            to="/"
+            onClick={() => {
+              setSearchModal(false);
+            }}
+          >
             <img src={Logo} alt="logo" />
           </Link>
         </div>
@@ -79,8 +84,8 @@ function Navbar() {
             <Link
               to="/"
               onClick={() => {
-                showSearch();
                 setClick(false);
+                setSearchModal(false);
               }}
             >
               Home
@@ -92,7 +97,6 @@ function Navbar() {
             <Link
               to="/post"
               onClick={() => {
-                showSearch();
                 setClick(false);
               }}
             >
@@ -105,7 +109,6 @@ function Navbar() {
             <Link
               to="/profile"
               onClick={() => {
-                showSearch();
                 setClick(false);
               }}
             >

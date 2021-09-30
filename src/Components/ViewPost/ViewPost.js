@@ -19,6 +19,7 @@ function ViewPost({ userID }) {
   const [isModal, setIsModal] = useState(false);
   const [actionModal, setActionModal] = useState(false);
   const [postId, setPostId] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   const showModal = () => {
     setIsModal(!isModal);
@@ -81,7 +82,7 @@ function ViewPost({ userID }) {
   const submitComment = (e) => {
     e.preventDefault();
     if (!comment.trim()) {
-      alert("empty");
+      setErrorMessage("The Field cannot be empty");
     } else {
       Axios.post(
         `https://mern-social-konek.herokuapp.com/post/comment/${post._id}`,
@@ -262,6 +263,11 @@ function ViewPost({ userID }) {
               <hr className="profile-line" />
 
               <div className="view-post-comment-input">
+                {errorMessage && (
+                  <div className="error">
+                    <p>{errorMessage}</p>
+                  </div>
+                )}
                 <form onSubmit={submitComment}>
                   <input
                     type="text"
@@ -335,9 +341,15 @@ function ViewPost({ userID }) {
             onRequestClose={() => setActionModal(false)}
             className="modal"
           >
-            <button onClick={() => deletePost(postId)}>Delete</button>
+            <button onClick={() => deletePost(postId)}>
+              <i className="fas fa-trash"></i> Delete
+            </button>
             <hr className="profile-line" />
-            <button>Edit</button>
+            <button>
+              <Link to={`/edit/post/${postId}`}>
+                <i className="far fa-edit"></i> Edit
+              </Link>
+            </button>
           </Modal>
         </div>
       </div>

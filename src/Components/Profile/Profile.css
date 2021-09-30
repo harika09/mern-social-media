@@ -166,6 +166,22 @@ input[type="submit"] {
   border-radius: 4px;
 }
 
+.following-user-info {
+  display: flex;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+}
+
+.following-user-info img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
 @media screen and (max-width: 650px) {
   .profile-top-content {
     display: flex;

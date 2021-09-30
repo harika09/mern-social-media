@@ -11,6 +11,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [errorReset, setErrorReset] = useState("");
   const [isloading, setLoading] = useState(false);
   const [isModal, setIsModal] = useState(false);
   const [recoverEmail, setRecoverEmail] = useState("");
@@ -42,13 +43,23 @@ function Login() {
   };
 
   const btnRecover = () => {
-    Axios.post("http://localhost:4000/auth/reset-password", {
-      email: recoverEmail,
-    }).then((response) => {
-      setRecoverEmail("");
-      setIsModal(false);
-      setError(response.data.success);
-    });
+    if (!recoverEmail.trim()) {
+      setLoading(false);
+      setErrorReset("Email is empty");
+    } else {
+      Axios.post(
+        "https://mern-social-konek.herokuapp.com/auth/reset-password",
+        {
+          email: recoverEmail,
+        }
+      ).then((response) => {
+        setRecoverEmail("");
+        setErrorReset(response.data.success);
+        setTimeout(() => {
+          setIsModal(false);
+        }, 15000);
+      });
+    }
   };
 
   useEffect(() => {
@@ -83,6 +94,7 @@ function Login() {
                     type="email"
                     placeholder="Enter Emaill Address"
                     value={email}
+                    maxLength="50"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -94,6 +106,7 @@ function Login() {
                     type="password"
                     placeholder="Enter Password"
                     value={password}
+                    maxLength="50"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
@@ -107,7 +120,7 @@ function Login() {
                 </div>
 
                 <div className="register">
-                  <Link to="/register">Register</Link>
+                  <Link to="/register">Register Here</Link>
                 </div>
               </div>
             </div>
@@ -121,6 +134,11 @@ function Login() {
         >
           <div className="recovery-options">
             <div className="recover-password">
+              {errorReset && (
+                <div className="error">
+                  <p>{errorReset}</p>
+                </div>
+              )}
               <input
                 type="email"
                 placeholder="Enter Email"

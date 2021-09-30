@@ -82,6 +82,7 @@ function CreatePost() {
                   type="text"
                   placeholder="Enter Title"
                   value={title}
+                  maxLength="50"
                   onChange={(e) => setTitle(e.target.value)}
                 />
 
@@ -90,6 +91,7 @@ function CreatePost() {
                   type="text"
                   placeholder="Enter Title"
                   value={content}
+                  maxLength="100"
                   onChange={(e) => setContent(e.target.value)}
                 />
                 <p className="add-image">Click to upload image</p>

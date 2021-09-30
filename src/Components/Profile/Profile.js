@@ -18,6 +18,7 @@ function Profile() {
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const [followModal, setFollowModal] = useState(false);
+  const [followingUsers, setFollowingUsers] = useState([]);
 
   const fileHandler = (e) => {
     /* Preview Image */
@@ -55,6 +56,8 @@ function Profile() {
     setPost(userInfo.data.post);
     setLoading(false);
     setFile(userInfo.data.user.image);
+    setFollowingUsers(userInfo.data.following);
+    console.log(userInfo.data.following);
 
     // setFile(profile.data.image);
   };
@@ -276,12 +279,30 @@ function Profile() {
             ""
           )}
 
+          {/* Following List */}
           <Modal
             isOpen={followModal}
             onRequestClose={() => setFollowModal(false)}
             className="edit-modal"
           >
-            Following
+            {followingUsers.length > 0 ? (
+              <div className="following-list">
+                {followingUsers.map((following, key) => {
+                  return (
+                    <div key={following._id} className="following-user-info">
+                      <Link to={`/view/profile/${following._id}`}>
+                        <img src={following.image} alt={following.username} />
+                      </Link>
+                      <Link to={`/view/profile/${following._id}`}>
+                        <span>{following.username}</span>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              "No Data Available"
+            )}
           </Modal>
         </div>
       </div>

@@ -169,3 +169,11 @@
 .comment-right-section i {
   cursor: pointer;
 }
+
+@media screen and (max-width: 680px) {
+  .top-post-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}

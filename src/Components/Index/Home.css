@@ -201,3 +201,11 @@ button {
 .modal button:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 680px) {
+  .post-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}

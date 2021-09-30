@@ -91,6 +91,7 @@ function EditPost() {
                     type="text"
                     placeholder="Enter Title"
                     name="title"
+                    maxLength="50"
                     value={state.title}
                     onChange={(e) =>
                       setState({ ...state, [e.target.name]: e.target.value })
@@ -103,6 +104,7 @@ function EditPost() {
                     name="content"
                     placeholder="Enter Title"
                     value={state.content}
+                    maxLength="100"
                     onChange={(e) =>
                       setState({ ...state, [e.target.name]: e.target.value })
                     }

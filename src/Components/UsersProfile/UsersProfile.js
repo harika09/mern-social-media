@@ -30,7 +30,6 @@ function UsersProfile() {
     setProfile(profile.data.user);
     setPost(profile.data.post);
     setLoading(false);
-    console.log(profile);
   };
 
   const btnFollow = (id) => {

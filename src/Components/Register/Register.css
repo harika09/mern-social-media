@@ -88,6 +88,7 @@ input[type="submit"]:hover {
 .register-logo img {
   display: block;
   margin: 0 auto;
+  object-fit: cover;
 }
 
 .have-account a {
@@ -119,5 +120,9 @@ input[type="submit"]:hover {
 
   .have-account a {
     font-size: 0.8rem;
+  }
+
+  .register-logo img {
+    width: 75px;
   }
 }
