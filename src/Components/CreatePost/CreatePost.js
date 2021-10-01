@@ -22,7 +22,7 @@ function CreatePost() {
     e.preventDefault();
 
     /* Enable Loading animation */
-    setPageLoad(true);
+
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);
@@ -46,9 +46,9 @@ function CreatePost() {
       ).then((response) => {
         if (response.data.error) {
           setError(response.data.error);
-        } else {
-          history.push("/");
         }
+        setPageLoad(true);
+        history.push("/");
       });
     }
   };

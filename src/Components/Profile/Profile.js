@@ -87,7 +87,7 @@ function Profile() {
 
     Axios.put(
       /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
-      "https://mern-social-konek.herokuapp.com/post/profile/update",
+      "https://mern-social-konek.herokuapp.com/auth/profile/update",
       formData,
       {
         headers: {

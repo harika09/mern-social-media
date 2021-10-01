@@ -13,6 +13,7 @@ import UsersProfile from "./Components/UsersProfile/UsersProfile";
 import ViewPost from "./Components/ViewPost/ViewPost";
 import Page404 from "./Components/Page404/Page404";
 import EditPost from "./Components/EditPost/EditPost";
+import Following from "./Components/Following/Following";
 import ResetPassword from "./Components/ResetPassword/ResetPassword";
 
 Modal.setAppElement("#root");
@@ -29,6 +30,7 @@ function App() {
         <Route path="/view/post/:id" component={ViewPost} />
         <Route path="/edit/post/:id" component={EditPost} />
         <Route path="/update/password/:token" component={ResetPassword} />
+        <Route path="/following" component={Following} />
         <Route component={Page404} />
       </Switch>
     </Router>

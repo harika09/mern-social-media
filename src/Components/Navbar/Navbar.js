@@ -35,6 +35,34 @@ function Navbar() {
     setUserList(users.data);
   };
 
+  const btnFollow = (id) => {
+    Axios.put(
+      `https://mern-social-konek.herokuapp.com/auth/follow`,
+      { requestedUserId: id },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      loadUsers();
+    });
+  };
+
+  const btnUnFollow = (id) => {
+    Axios.put(
+      `https://mern-social-konek.herokuapp.com/auth/unfollow`,
+      { requestedUserId: id },
+      {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("Token"),
+        },
+      }
+    ).then((response) => {
+      loadUsers();
+    });
+  };
+
   useEffect(() => {
     const checkToken = localStorage.getItem("Token");
     const userData = localStorage.getItem("User");
@@ -105,6 +133,18 @@ function Navbar() {
           </li>
 
           <li className="nav-list">
+            <i className="fas fa-user-plus"></i>
+            <Link
+              to="/following"
+              onClick={() => {
+                setClick(false);
+              }}
+            >
+              Following
+            </Link>
+          </li>
+
+          <li className="nav-list">
             <i className="fas fa-user-circle"></i>
             <Link
               to="/profile"
@@ -149,41 +189,85 @@ function Navbar() {
                 })
                 .map((users, key) => {
                   return (
-                    <div key={users._id} className="search-user-info">
-                      <div className="search-user-img">
-                        <a
-                          href={
-                            users._id !== userId
-                              ? `/view/profile/${users._id}`
-                              : `/profile`
-                          }
-                        >
-                          <img
-                            src={users.image}
-                            alt={users.username}
-                            onClick={() => {
-                              setSearchModal(false);
-                            }}
-                          />
-                        </a>
-                      </div>
-                      <div className="search-user-name">
-                        <a
-                          href={
-                            users._id !== userId
-                              ? `/view/profile/${users._id}`
-                              : `/profile`
-                          }
-                        >
-                          <span
-                            onClick={() => {
-                              setSearchModal(false);
-                            }}
-                          >
-                            {users.username}
-                          </span>
-                        </a>
-                      </div>
+                    <div key={users._id} className="search-user">
+                      {/* hide current user to search bar */}
+                      {users._id !== userId ? (
+                        <div className="search-user-info">
+                          <div className="search-list">
+                            <div className="search-user-img">
+                              <a
+                                href={
+                                  users._id !== userId
+                                    ? `/view/profile/${users._id}`
+                                    : `/profile`
+                                }
+                              >
+                                <img
+                                  src={users.image}
+                                  alt={users.username}
+                                  onClick={() => {
+                                    setSearchModal(false);
+                                  }}
+                                />
+                              </a>
+                            </div>
+                            <div className="search-user-name">
+                              <a
+                                href={
+                                  users._id !== userId
+                                    ? `/view/profile/${users._id}`
+                                    : `/profile`
+                                }
+                              >
+                                <span
+                                  onClick={() => {
+                                    setSearchModal(false);
+                                  }}
+                                >
+                                  {users.username}
+                                </span>
+                              </a>
+                            </div>
+                          </div>
+
+                          <div className="search-user-follow">
+                            {/* hide current user Follower/Following */}
+                            {users.followers.includes(userId) ? (
+                              <div className="btn-follow">
+                                {users._id !== userId ? (
+                                  <button
+                                    onClick={() => {
+                                      btnUnFollow(users._id);
+                                    }}
+                                    className="btn-follow"
+                                  >
+                                    Following
+                                  </button>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            ) : (
+                              <div className="btn-follow">
+                                {users._id !== userId ? (
+                                  <button
+                                    onClick={() => {
+                                      btnFollow(users._id);
+                                    }}
+                                    className="btn-follow"
+                                  >
+                                    Follow
+                                  </button>
+                                ) : (
+                                  ""
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   );
                 })}

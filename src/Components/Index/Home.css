@@ -171,10 +171,30 @@ button {
 .modal button i {
   margin-right: 5px;
 }
+
+.user-list-container {
+  border: 1px solid #ccc;
+  padding: 15px;
+}
+
+.main-post-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.main-post-container .post-list-container {
+  width: 70%;
+}
+
+.main-post-container .user-list-container {
+  width: 30%;
+  height: 450px;
+}
 @media screen and (max-width: 680px) {
   .post-image img {
     width: 100%;
-    height: auto;
+    height: 350px;
     object-fit: cover;
   }
 }
