@@ -272,13 +272,13 @@ function Home() {
                 className="modal"
               >
                 <button onClick={() => btnDelete(postId)}>
-                  <i className="fas fa-trash"></i>Delete
+                  Delete <i className="fas fa-trash"></i>
                 </button>
                 <hr className="profile-line" />
 
                 <Link to={`/edit/post/${postId}`}>
                   <button>
-                    <i className="far fa-edit"></i>Edit
+                    Edit <i className="far fa-edit"></i>
                   </button>
                 </Link>
               </Modal>

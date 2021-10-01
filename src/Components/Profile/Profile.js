@@ -19,6 +19,8 @@ function Profile() {
   const [file, setFile] = useState("");
   const [followModal, setFollowModal] = useState(false);
   const [followingUsers, setFollowingUsers] = useState([]);
+  const [followersModal, setFollowersModal] = useState(false);
+  const [userFollowers, setUserFollowers] = useState([]);
 
   const fileHandler = (e) => {
     /* Preview Image */
@@ -39,6 +41,10 @@ function Profile() {
     setFollowModal(!followModal);
   };
 
+  const showFollowers = () => {
+    setFollowersModal(!followersModal);
+  };
+
   const headers = {
     headers: {
       Authorization: "Bearer " + localStorage.getItem("Token"),
@@ -57,7 +63,7 @@ function Profile() {
     setLoading(false);
     setFile(userInfo.data.user.image);
     setFollowingUsers(userInfo.data.following);
-    console.log(userInfo.data.following);
+    setUserFollowers(userInfo.data.followers);
 
     // setFile(profile.data.image);
   };
@@ -164,16 +170,17 @@ function Profile() {
 
                     <div className="profile-post">
                       <strong>{profile.followers.length}</strong>
-                      <span>
-                        {profile.followers.length <= 1
-                          ? "Follower"
-                          : "Followers"}
-                      </span>
+
+                      {profile.followers.length <= 1 ? (
+                        <span onClick={showFollowers}>Follower</span>
+                      ) : (
+                        <span onClick={showFollowers}>Followers</span>
+                      )}
                     </div>
 
                     <div className="profile-post">
                       <strong>{profile.following.length}</strong>
-                      <button onClick={showFollow}>
+                      <span onClick={showFollow}>
                         <span>
                           {/* {profile.following.length}
                         {/* {profile.comments.following <= 1
@@ -181,7 +188,7 @@ function Profile() {
                           : "Following"} */}
                           Following
                         </span>
-                      </button>
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -295,6 +302,32 @@ function Profile() {
                       </Link>
                       <Link to={`/view/profile/${following._id}`}>
                         <span>{following.username}</span>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              "No Data Available"
+            )}
+          </Modal>
+
+          {/* Followers List */}
+          <Modal
+            isOpen={followersModal}
+            onRequestClose={() => setFollowersModal(false)}
+            className="edit-modal"
+          >
+            {userFollowers.length > 0 ? (
+              <div className="follower-list">
+                {userFollowers.map((followers, key) => {
+                  return (
+                    <div key={followers._id} className="follower-user-info">
+                      <Link to={`/view/profile/${followers._id}`}>
+                        <img src={followers.image} alt={followers.username} />
+                      </Link>
+                      <Link to={`/view/profile/${followers._id}`}>
+                        <span>{followers.username}</span>
                       </Link>
                     </div>
                   );

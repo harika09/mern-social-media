@@ -57,18 +57,22 @@ button {
   justify-content: left;
   margin-top: 30px;
   gap: 20px;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 
 .profile-other-info strong {
   margin-right: 10px;
 }
 
+.profile-post span {
+  cursor: pointer;
+}
+
 /* Loading Animation */
 .loading-animation {
   position: fixed;
   top: 50%;
-  left: 45%;
+  left: 50%;
 }
 
 /* Profile Bottom Container */
@@ -166,7 +170,8 @@ input[type="submit"] {
   border-radius: 4px;
 }
 
-.following-user-info {
+.following-user-info,
+.follower-user-info {
   display: flex;
   border: 1px solid #ccc;
   margin-bottom: 10px;
@@ -175,7 +180,8 @@ input[type="submit"] {
   padding: 10px;
 }
 
-.following-user-info img {
+.following-user-info img,
+.follower-user-info img {
   width: 45px;
   height: 45px;
   border-radius: 50%;

@@ -97,6 +97,7 @@ function ViewPost({ userID }) {
       ).then((response) => {
         setComment("");
         getPost();
+        setErrorMessage("");
       });
     }
   };
@@ -342,12 +343,12 @@ function ViewPost({ userID }) {
             className="modal"
           >
             <button onClick={() => deletePost(postId)}>
-              <i className="fas fa-trash"></i> Delete
+              Delete <i className="fas fa-trash"></i>
             </button>
             <hr className="profile-line" />
             <button>
               <Link to={`/edit/post/${postId}`}>
-                <i className="far fa-edit"></i> Edit
+                Edit <i className="far fa-edit"></i>
               </Link>
             </button>
           </Modal>

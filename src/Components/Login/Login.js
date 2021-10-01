@@ -120,7 +120,8 @@ function Login() {
                 </div>
 
                 <div className="register">
-                  <Link to="/register">Register Here</Link>
+                  Create your account
+                  <Link to="/register"> Here</Link>
                 </div>
               </div>
             </div>
