@@ -16,13 +16,13 @@ function CreatePost() {
   /* Disabling  Loading  animation */
   setTimeout(() => {
     setPageLoad(false);
-  }, 1500);
+  }, 2500);
 
   const submitPost = (e) => {
     e.preventDefault();
 
     /* Enable Loading animation */
-
+    setPageLoad(true);
     const formData = new FormData();
     formData.append("image", image);
     formData.append("title", title);
@@ -30,7 +30,6 @@ function CreatePost() {
 
     if (!title.trim() || !content.trim() || !image) {
       setError("Empty Fields");
-      setPageLoad(true);
     } else {
       Axios.post(
         "https://mern-social-konek.herokuapp.com/post/newPost",
@@ -47,7 +46,7 @@ function CreatePost() {
         if (response.data.error) {
           setError(response.data.error);
         }
-        setPageLoad(true);
+        setError("");
         history.push("/");
       });
     }

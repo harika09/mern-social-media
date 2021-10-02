@@ -42,6 +42,7 @@ function Home() {
     setMaxPage(details.data.totalPage);
     setLoading(false);
     setPageLoad(false);
+    console.log(details);
   };
 
   /* Liking post */
@@ -241,13 +242,10 @@ function Home() {
                         </div>
 
                         <div className="view-comments">
-                          {posts.comments.length <= 1 ? (
-                            <Link to="#">
-                              <i className="far fa-comment-alt"></i>
-                              <span> {posts.comments.length}</span>
-                            </Link>
+                          {posts.comments.length === 0 ? (
+                            <i className="far fa-comment-alt"></i>
                           ) : (
-                            <Link to="#">
+                            <Link to={`/view/post/${posts._id}`}>
                               <i className="far fa-comment-alt"></i>
                               <span>{posts.comments.length}</span>
                             </Link>

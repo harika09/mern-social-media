@@ -186,6 +186,7 @@ input[type="submit"] {
   height: 45px;
   border-radius: 50%;
   border: 1px solid #ccc;
+  object-fit: cover;
 }
 
 @media screen and (max-width: 650px) {
