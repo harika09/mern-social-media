@@ -12,7 +12,7 @@ function UsersProfile() {
   const [isloading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
   const [userId, setUserId] = useState("");
-  const [id, setId] = useState(params.id);
+  let [id, setId] = useState(params.id);
 
   const headers = {
     headers: {
