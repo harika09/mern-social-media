@@ -53,7 +53,8 @@ function Profile() {
 
   const loadUserInfo = async () => {
     const userInfo = await Axios.get(
-      `https://mern-social-konek.herokuapp.com/auth/profile`,
+      /* http://localhost:4000/  https://mern-social-konek.herokuapp.com*/
+      `http://localhost:4000/auth/profile`,
       headers
     );
 
@@ -114,7 +115,7 @@ function Profile() {
     } else {
       history.push("/login");
     }
-  }, [userId, userFollowers, followingUsers]);
+  }, []);
 
   return (
     <>
