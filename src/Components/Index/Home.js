@@ -42,7 +42,6 @@ function Home() {
     setMaxPage(details.data.totalPage);
     setLoading(false);
     setPageLoad(false);
-    console.log(details);
   };
 
   /* Liking post */

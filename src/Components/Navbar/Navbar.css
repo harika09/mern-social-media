@@ -55,13 +55,21 @@ li {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   width: 550px;
-  height: 350px;
+
   padding: 15px;
   text-align: center;
   background-color: #ffff;
   border: 1px solid #cccc;
+}
+
+.search-user-list {
+  height: 350px;
   max-height: calc(100vh - 100px);
   overflow-y: auto;
+}
+
+.search-user-list input {
+  margin-top: 20px;
 }
 
 .search-user-info {
@@ -98,6 +106,10 @@ li {
 @media screen and (max-width: 680px) {
   .navbar-menu {
     display: none;
+  }
+
+  .nav-content {
+    padding: 5px;
   }
 
   .navbar-menu.active {

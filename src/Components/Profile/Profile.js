@@ -114,7 +114,7 @@ function Profile() {
     } else {
       history.push("/login");
     }
-  }, [userId]);
+  }, [userId, userFollowers, followingUsers]);
 
   return (
     <>
@@ -222,6 +222,15 @@ function Profile() {
                 </div>
               )}
 
+              <button
+                className="profile-btn-close"
+                onClick={() => {
+                  setIsModal(false);
+                }}
+              >
+                <i className="fa fa-times-circle"></i>
+              </button>
+
               <form onSubmit={updateProfile}>
                 <img src={file} alt="upload" className="upload-image" />
 
@@ -287,52 +296,74 @@ function Profile() {
           <Modal
             isOpen={followModal}
             onRequestClose={() => setFollowModal(false)}
-            className="edit-modal"
+            className="follow-modal"
           >
-            {followingUsers.length > 0 ? (
-              <div className="following-list">
-                {followingUsers.map((following, key) => {
-                  return (
-                    <div key={following._id} className="following-user-info">
-                      <Link to={`/view/profile/${following._id}`}>
-                        <img src={following.image} alt={following.username} />
-                      </Link>
-                      <Link to={`/view/profile/${following._id}`}>
-                        <span>{following.username}</span>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              "No Data Available"
-            )}
+            <div className="follow-modal-content">
+              <button
+                className="profile-btn-close"
+                onClick={() => {
+                  setFollowModal(false);
+                }}
+              >
+                <i className="fas fa-times-circle"></i>
+              </button>
+
+              {followingUsers.length > 0 ? (
+                <div className="following-list">
+                  {followingUsers.map((following, key) => {
+                    return (
+                      <div key={following._id} className="following-user-info">
+                        <Link to={`/view/profile/${following._id}`}>
+                          <img src={following.image} alt={following.username} />
+                        </Link>
+                        <Link to={`/view/profile/${following._id}`}>
+                          <span>{following.username}</span>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                "No Following"
+              )}
+            </div>
           </Modal>
 
           {/* Followers List */}
           <Modal
             isOpen={followersModal}
             onRequestClose={() => setFollowersModal(false)}
-            className="edit-modal"
+            className="follow-modal"
           >
-            {userFollowers.length > 0 ? (
-              <div className="follower-list">
-                {userFollowers.map((followers, key) => {
-                  return (
-                    <div key={followers._id} className="follower-user-info">
-                      <Link to={`/view/profile/${followers._id}`}>
-                        <img src={followers.image} alt={followers.username} />
-                      </Link>
-                      <Link to={`/view/profile/${followers._id}`}>
-                        <span>{followers.username}</span>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            ) : (
-              "No Data Available"
-            )}
+            <div className="follower-modal-content">
+              <button
+                className="profile-btn-close"
+                onClick={() => {
+                  setFollowersModal(false);
+                }}
+              >
+                <i className="fas fa-times-circle"></i>
+              </button>
+
+              {userFollowers.length > 0 ? (
+                <div className="follower-list">
+                  {userFollowers.map((followers, key) => {
+                    return (
+                      <div key={followers._id} className="follower-user-info">
+                        <Link to={`/view/profile/${followers._id}`}>
+                          <img src={followers.image} alt={followers.username} />
+                        </Link>
+                        <Link to={`/view/profile/${followers._id}`}>
+                          <span>{followers.username}</span>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                "No Followers"
+              )}
+            </div>
           </Modal>
         </div>
       </div>

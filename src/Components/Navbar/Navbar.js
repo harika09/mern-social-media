@@ -164,6 +164,15 @@ function Navbar() {
         className="search-modal"
       >
         <div className="search-user-list">
+          <button
+            className="profile-btn-close"
+            onClick={() => {
+              setSearchModal(false);
+            }}
+          >
+            <i className="fas fa-times-circle"></i>
+          </button>
+
           <input
             type="text"
             value={search}

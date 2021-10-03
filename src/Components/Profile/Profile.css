@@ -118,6 +118,21 @@ button {
   border: 1px solid #cccc;
 }
 
+.follow-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  max-width: 100%;
+  padding: 15px;
+  background-color: #ffff;
+  border: 1px solid #cccc;
+}
+
 .edit-modal input[type="text"] {
   width: 100%;
   border: 1px solid #ccc;
@@ -162,6 +177,15 @@ input[type="submit"] {
 }
 
 /* Follow Btn */
+
+/*Scroll */
+.following-list,
+.follower-list {
+  height: 25vh;
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+}
+
 .profile-btn .btn-follow {
   background-color: #0095f6;
   font-size: 1.1rem;
@@ -187,6 +211,14 @@ input[type="submit"] {
   border-radius: 50%;
   border: 1px solid #ccc;
   object-fit: cover;
+}
+
+.profile-btn-close i {
+  position: absolute;
+  left: 85%;
+  top: -12px;
+  font-size: 2rem;
+  color: #1e3163;
 }
 
 @media screen and (max-width: 650px) {
@@ -239,8 +271,15 @@ input[type="submit"] {
     width: 100%;
   }
 
-  .edit-modal {
+  .bottom-container {
+    padding-top: 20px;
+  }
+
+  .edit-modal,
+  .follow-modal {
+    top: 55%;
     width: 100%;
-    max-width: 300px;
+    max-width: 310px;
+    height: auto;
   }
 }

@@ -291,50 +291,61 @@ function ViewPost({ userID }) {
             onRequestClose={() => setIsModal(false)}
             className="comments-modal"
           >
-            {loadComment.length === 0 ? (
-              <div className="comment-empty">
-                <span>No Comment</span>
-              </div>
-            ) : (
-              loadComment.map((value, key) => {
-                return (
-                  <div key={value._id} className="comments-container">
-                    <div className="comments-list">
-                      <div className="comments-user-list">
-                        <div className="comment-left-sction">
-                          <div className="comments-user-image">
-                            <Link to={`/view/profile/${value.userId}`}>
-                              <img src={value.avatar} alt={value.username} />
-                            </Link>
-                          </div>
+            <div className="comment-modal-list">
+              <button
+                className="profile-btn-close"
+                onClick={() => {
+                  setIsModal(false);
+                }}
+              >
+                <i className="fas fa-times-circle"></i>
+              </button>
 
-                          <div className="comments-user-info">
-                            <Link to={`/view/profile/${post.userId}`}>
-                              <h3>{value.username}</h3>
-                            </Link>
+              {loadComment.length === 0 ? (
+                <div className="comment-empty">
+                  <span>No Comment</span>
+                </div>
+              ) : (
+                loadComment.map((value, key) => {
+                  return (
+                    <div key={value._id} className="comments-container">
+                      <div className="comments-list">
+                        <div className="comments-user-list">
+                          <div className="comment-left-sction">
+                            <div className="comments-user-image">
+                              <Link to={`/view/profile/${value.userId}`}>
+                                <img src={value.avatar} alt={value.username} />
+                              </Link>
+                            </div>
 
-                            <p>{value.comment}</p>
-                            <span>{moment(value.createdAt).fromNow()}</span>
+                            <div className="comments-user-info">
+                              <Link to={`/view/profile/${post.userId}`}>
+                                <h3>{value.username}</h3>
+                              </Link>
+
+                              <p>{value.comment}</p>
+                              <span>{moment(value.createdAt).fromNow()}</span>
+                            </div>
                           </div>
+                          {value.userId === userId ? (
+                            <div className="comment-right-section">
+                              <i
+                                onClick={() => {
+                                  deleteComment(value._id);
+                                }}
+                                className="far fa-times-circle"
+                              ></i>
+                            </div>
+                          ) : (
+                            ""
+                          )}
                         </div>
-                        {value.userId === userId ? (
-                          <div className="comment-right-section">
-                            <i
-                              onClick={() => {
-                                deleteComment(value._id);
-                              }}
-                              className="far fa-times-circle"
-                            ></i>
-                          </div>
-                        ) : (
-                          ""
-                        )}
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            )}
+                  );
+                })
+              )}
+            </div>
           </Modal>
 
           <Modal

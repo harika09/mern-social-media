@@ -78,51 +78,49 @@ function EditPost() {
               <HashLoader loading color="#4B5A82" size={75} />
             </div>
           ) : (
-            <div className="edit-form">
-              <form onSubmit={updatePost}>
-                {error && (
-                  <div className="error">
-                    <p>{error}</p>
-                  </div>
-                )}
-                <div className="edit-post-form">
-                  <label htmlFor="title">Title</label>
-                  <input
-                    type="text"
-                    placeholder="Enter Title"
-                    name="title"
-                    maxLength="50"
-                    value={state.title}
-                    onChange={(e) =>
-                      setState({ ...state, [e.target.name]: e.target.value })
-                    }
-                  />
-
-                  <label htmlFor="content">Content</label>
-                  <input
-                    type="text"
-                    name="content"
-                    placeholder="Enter Title"
-                    value={state.content}
-                    maxLength="100"
-                    onChange={(e) =>
-                      setState({ ...state, [e.target.name]: e.target.value })
-                    }
-                  />
-                  <p className="add-image">Click replaced the image</p>
-                  <label>
-                    <input
-                      type="file"
-                      onChange={(e) => setImage(e.target.files[0])}
-                      accept="image/png, image/gif, image/jpeg"
-                    />
-                    <i className="fas fa-image"></i>
-                  </label>
-
-                  <input type="submit" value="Post" onSubmit={updatePost} />
+            <form onSubmit={updatePost}>
+              {error && (
+                <div className="error">
+                  <p>{error}</p>
                 </div>
-              </form>
-            </div>
+              )}
+              <div className="edit-post-form">
+                <label htmlFor="title">Title</label>
+                <input
+                  type="text"
+                  placeholder="Enter Title"
+                  name="title"
+                  maxLength="50"
+                  value={state.title}
+                  onChange={(e) =>
+                    setState({ ...state, [e.target.name]: e.target.value })
+                  }
+                />
+
+                <label htmlFor="content">Content</label>
+                <input
+                  type="text"
+                  name="content"
+                  placeholder="Enter Title"
+                  value={state.content}
+                  maxLength="100"
+                  onChange={(e) =>
+                    setState({ ...state, [e.target.name]: e.target.value })
+                  }
+                />
+                <p className="add-image">Click replaced the image</p>
+                <label>
+                  <input
+                    type="file"
+                    onChange={(e) => setImage(e.target.files[0])}
+                    accept="image/png, image/gif, image/jpeg"
+                  />
+                  <i className="fas fa-image"></i>
+                </label>
+
+                <input type="submit" value="Post" onSubmit={updatePost} />
+              </div>
+            </form>
           )}
         </div>
       </div>
