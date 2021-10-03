@@ -22,7 +22,7 @@ function UsersProfile() {
 
   const loadProfile = async () => {
     const profile = await Axios.get(
-      `http://localhost:4000/auth/view/profile/${id}`,
+      `https://mern-social-konek.herokuapp.com/auth/view/profile/${id}`,
       headers
     );
 

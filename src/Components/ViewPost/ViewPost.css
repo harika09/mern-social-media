@@ -174,11 +174,62 @@
 @media screen and (max-width: 680px) {
   .top-post-image img {
     width: 100%;
-    height: 450px;
+    height: 300px;
     object-fit: cover;
   }
 
   .comments-modal {
-    width: 290px;
+    width: 320px;
+  }
+
+  .top-post-profile-image img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .top-post-profile-info h3 {
+    font-size: 0.9rem;
+  }
+
+  .top-post-profile-info span {
+    font-size: 0.7rem;
+  }
+
+  .view-post-info,
+  .view-bottom-post {
+    padding: 5px 10px;
+  }
+
+  .view-post-info span {
+    font-size: 1rem;
+  }
+
+  .view-post-info p {
+    font-size: 0.9rem;
+  }
+
+  .view-post-info span {
+    margin-bottom: 10px;
+  }
+
+  .view-post-action {
+    gap: 5px;
+  }
+
+  .view-bottom-post-action .view-post-like span {
+    font-size: 0.9rem;
+  }
+
+  .view-post-comment button span {
+    font-size: 0.9rem;
+  }
+
+  .view-post-comment-input input {
+    padding: 10px;
+  }
+
+  .view-post-comment-input input[type="submit"] {
+    padding: 10px;
+    font-size: 0.8rem;
   }
 }

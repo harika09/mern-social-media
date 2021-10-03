@@ -191,10 +191,40 @@ button {
   width: 30%;
   height: 450px;
 }
+
 @media screen and (max-width: 680px) {
   .post-image img {
     width: 100%;
-    height: 350px;
+    height: 300px;
     object-fit: cover;
+  }
+
+  .top-post-content .post-user-info img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .top-post-content .post-user-info div h3 {
+    font-size: 0.9rem;
+  }
+
+  .top-post-content .post-user-info div span {
+    font-size: 0.6;
+  }
+
+  .bottom-post-content {
+    padding: 8px;
+  }
+
+  .botton-post-action .btn-like span {
+    font-size: 0.8rem;
+  }
+
+  .botton-post-action .view-comments span {
+    font-size: 0.9rem;
+  }
+
+  .bottom-post-info {
+    margin-top: 5px;
   }
 }

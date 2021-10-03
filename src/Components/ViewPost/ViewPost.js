@@ -249,14 +249,16 @@ function ViewPost({ userID }) {
                       {post.comments.length}
                     </span>
                   ) : (
-                    <button
-                      onClick={() => {
-                        showModal();
-                      }}
-                    >
-                      <i className="far fa-comment-alt"></i>
-                      {post.comments.length}
-                    </button>
+                    <div>
+                      <button
+                        onClick={() => {
+                          showModal();
+                        }}
+                      >
+                        <i className="far fa-comment-alt"></i>
+                      </button>
+                      <span> {post.comments.length}</span>
+                    </div>
                   )}
                 </div>
               </div>
