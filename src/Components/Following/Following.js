@@ -23,7 +23,7 @@ function Following() {
 
   const loadUserFollowing = async () => {
     const posts = await Axios.get(
-      `http://localhost:4000/auth/following/users?page=${page}`,
+      `https://mern-social-konek.herokuapp.com/auth/following/users?page=${page}`,
       headers
     );
 
@@ -31,8 +31,6 @@ function Following() {
     setMaxPage(posts.data.totalPage);
     setIsLoading(false);
     setPageLoad(false);
-
-    console.log(posts);
   };
 
   useEffect(() => {
@@ -91,7 +89,9 @@ function Following() {
           ) : (
             <div className="following-posts-list">
               {followingPost.length === 0 ? (
-                "No Posts"
+                <div className="empty-following">
+                  <h4>No Posts Available</h4>
+                </div>
               ) : (
                 <div className="user-following-post">
                   {followingPost.map((posts, key) => {
