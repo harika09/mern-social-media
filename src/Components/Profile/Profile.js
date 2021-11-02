@@ -84,7 +84,7 @@ function Profile() {
 
     Axios.put(
       /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
-      "https://mern-social-konek.herokuapp.com/post/profile/update",
+      "http://localhost:4000/post/profile/update",
       formData,
       {
         headers: {
@@ -114,7 +114,7 @@ function Profile() {
     } else {
       history.push("/login");
     }
-  }, []);
+  }, [userId]);
 
   return (
     <>
@@ -249,6 +249,7 @@ function Profile() {
                   placeholder="Update Username"
                   name="username"
                   value={state.username}
+                  maxLength="25"
                   onChange={(e) =>
                     setState({ ...state, [e.target.name]: e.target.value })
                   }
@@ -258,6 +259,7 @@ function Profile() {
                   placeholder="Update First Name"
                   name="firstName"
                   value={state.firstName}
+                  maxLength="30"
                   onChange={(e) =>
                     setState({ ...state, [e.target.name]: e.target.value })
                   }
@@ -267,6 +269,7 @@ function Profile() {
                   placeholder="Update Last Name"
                   name="lastName"
                   value={state.lastName}
+                  maxLength="30"
                   onChange={(e) =>
                     setState({ ...state, [e.target.name]: e.target.value })
                   }
@@ -277,6 +280,7 @@ function Profile() {
                   placeholder="Update Email"
                   name="email"
                   value={state.email}
+                  maxLength="60"
                   onChange={(e) =>
                     setState({ ...state, [e.target.name]: e.target.value })
                   }

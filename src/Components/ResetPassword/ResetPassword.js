@@ -62,6 +62,7 @@ function ResetPassword() {
               type="password"
               placeholder="Enter New Password"
               value={newPass}
+              maxLength="50"
               onChange={(e) => setNewPass(e.target.value)}
             />
             <button

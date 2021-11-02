@@ -97,7 +97,7 @@ function Register() {
                   <input
                     type="text"
                     placeholder="Enter Username"
-                    maxLength="30"
+                    maxLength="25"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                   />
@@ -110,7 +110,7 @@ function Register() {
                     type="email"
                     placeholder="Enter Emaill Address"
                     value={email}
-                    maxLength="50"
+                    maxLength="60"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
