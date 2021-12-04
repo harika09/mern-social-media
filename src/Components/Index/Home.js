@@ -31,19 +31,6 @@ function Home() {
     },
   };
 
-  /* Loading User Info */
-  const userInfo = async () => {
-    const details = await Axios.get(
-      `https://mern-social-konek.herokuapp.com/post/posts?page=${page}`,
-      headers
-    );
-
-    setPost([...post, ...details.data.post]);
-    setMaxPage(details.data.totalPage);
-    setLoading(false);
-    setPageLoad(false);
-  };
-
   /* Liking post */
   const btnLike = async (id) => {
     const requestedID = id;
@@ -129,9 +116,24 @@ function Home() {
   }, []);
 
   useEffect(() => {
+    let componentMounted = true;
     if (pageLoad) {
       setLoading(false);
     }
+
+    /* Loading User Info */
+    const userInfo = async () => {
+      const details = await Axios.get(
+        `https://mern-social-konek.herokuapp.com/post/posts?page=${page}`,
+        headers
+      );
+      if (componentMounted) {
+        setPost([...post, ...details.data.post]);
+        setMaxPage(details.data.totalPage);
+        setLoading(false);
+        setPageLoad(false);
+      }
+    };
 
     userInfo();
 
@@ -160,6 +162,10 @@ function Home() {
         // After 1 second the "isExecuted" will be set to "false" to allow the code inside the "if" statement to be executed again
       }
     }
+
+    return () => {
+      componentMounted = false;
+    };
   }, [page]);
 
   return (

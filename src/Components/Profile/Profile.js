@@ -7,6 +7,7 @@ import Axios from "axios";
 import "./Profile.css";
 
 function Profile() {
+  let componentMount = true;
   const history = useHistory();
   const [isloading, setLoading] = useState(true);
   const [isModal, setIsModal] = useState(false);
@@ -57,12 +58,14 @@ function Profile() {
       headers
     );
 
-    setProfile(userInfo.data.user);
-    setPost(userInfo.data.post);
-    setLoading(false);
-    setFile(userInfo.data.user.image);
-    setFollowingUsers(userInfo.data.following);
-    setUserFollowers(userInfo.data.followers);
+    if (componentMount) {
+      setProfile(userInfo.data.user);
+      setPost(userInfo.data.post);
+      setLoading(false);
+      setFile(userInfo.data.user.image);
+      setFollowingUsers(userInfo.data.following);
+      setUserFollowers(userInfo.data.followers);
+    }
   };
 
   const bntLogout = () => {
@@ -84,7 +87,7 @@ function Profile() {
 
     Axios.put(
       /* http://localhost:4000/ https://mern-social-konek.herokuapp.com */
-      "http://localhost:4000/post/profile/update",
+      "https://mern-social-konek.herokuapp.com/post/profile/update",
       formData,
       {
         headers: {
@@ -93,13 +96,15 @@ function Profile() {
         },
       }
     ).then((response) => {
-      if (response.data.error) {
-        setError(response.data.error);
-      } else {
-        /* Success update */
-        setError(response.data.success);
-        loadUserInfo();
-        setIsModal(false);
+      if (componentMount) {
+        if (response.data.error) {
+          setError(response.data.error);
+        } else {
+          /* Success update */
+          setError(response.data.success);
+          loadUserInfo();
+          setIsModal(false);
+        }
       }
     });
   };
@@ -114,6 +119,10 @@ function Profile() {
     } else {
       history.push("/login");
     }
+
+    return () => {
+      componentMount = false;
+    };
   }, [userId]);
 
   return (
