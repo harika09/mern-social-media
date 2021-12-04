@@ -7,6 +7,7 @@ import Modal from "react-modal";
 import moment from "moment";
 import Axios from "axios";
 import "./Home.css";
+import jwt_decode from "jwt-decode";
 
 function Home() {
   let PAGE_NUMBER = 0;
@@ -18,8 +19,14 @@ function Home() {
   const [postId, setPostId] = useState({});
   const [post, setPost] = useState([]);
   const [maxPage, setMaxPage] = useState("");
-
   const [userId, setUserId] = useState("");
+  let currentDate = new Date();
+  const token = localStorage.getItem("Token");
+  const decodeToken = jwt_decode(token);
+
+  if (decodeToken.exp * 1000 < currentDate.getTime()) {
+    history.push("/login");
+  }
 
   const showOptions = () => {
     setIsModal(!isModal);
