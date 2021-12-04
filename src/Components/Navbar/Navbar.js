@@ -196,7 +196,7 @@ function Navbar() {
                     return users;
                   }
                 })
-                .map((users, key) => {
+                .map((users) => {
                   return (
                     <div key={users._id} className="search-user">
                       {/* hide current user to search bar */}
@@ -204,25 +204,8 @@ function Navbar() {
                         <div className="search-user-info">
                           <div className="search-list">
                             <div className="search-user-img">
-                              <a
-                                href={
-                                  users._id !== userId
-                                    ? `/view/profile/${users._id}`
-                                    : `/profile`
-                                }
-                              >
-                                <img
-                                  src={users.image}
-                                  alt={users.username}
-                                  onClick={() => {
-                                    setSearchModal(false);
-                                  }}
-                                />
-                              </a>
-                            </div>
-                            <div className="search-user-name">
-                              <a
-                                href={
+                              <Link
+                                to={
                                   users._id !== userId
                                     ? `/view/profile/${users._id}`
                                     : `/profile`
@@ -233,9 +216,45 @@ function Navbar() {
                                     setSearchModal(false);
                                   }}
                                 >
+                                  <img
+                                    src={users.image}
+                                    alt={users.username}
+                                    onClick={() => {
+                                      setSearchModal(false);
+                                    }}
+                                  />
+                                </span>
+                              </Link>
+                              {/* <a
+                                href={
+                                  users._id !== userId
+                                    ? `/view/profile/${users._id}`
+                                    : `/profile`
+                                }
+                              >
+                               
+                              </a> */}
+                            </div>
+                            <div className="search-user-name">
+                              {users._id !== userId ? (
+                                <Link to={`/view/profile/${users._id}`} replace>
+                                  <span
+                                    onClick={() => {
+                                      setSearchModal(false);
+                                    }}
+                                  >
+                                    {users.username}
+                                  </span>
+                                </Link>
+                              ) : (
+                                <span
+                                  onClick={() => {
+                                    setSearchModal(false);
+                                  }}
+                                >
                                   {users.username}
                                 </span>
-                              </a>
+                              )}
                             </div>
                           </div>
 

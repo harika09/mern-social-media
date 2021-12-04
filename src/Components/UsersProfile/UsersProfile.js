@@ -12,7 +12,6 @@ function UsersProfile() {
   const [isloading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
   const [userId, setUserId] = useState("");
-  let [id, setId] = useState(params.id);
 
   const headers = {
     headers: {
@@ -22,7 +21,7 @@ function UsersProfile() {
 
   const loadProfile = async () => {
     const profile = await Axios.get(
-      `https://mern-social-konek.herokuapp.com/auth/view/profile/${id}`,
+      `https://mern-social-konek.herokuapp.com/auth/view/profile/${params.id}`,
       headers
     );
 
@@ -70,7 +69,7 @@ function UsersProfile() {
     } else {
       history.push("/login");
     }
-  }, [id]);
+  }, [profile]);
 
   return (
     <>
