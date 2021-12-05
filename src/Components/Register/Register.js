@@ -122,6 +122,7 @@ function Register() {
                     type="password"
                     placeholder="Enter Password"
                     value={password}
+                    autoComplete="off"
                     maxLength="50"
                     onChange={(e) => setPassword(e.target.value)}
                   />

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
+import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import "./EditPost.css";
 
@@ -12,6 +13,18 @@ function EditPost() {
   const [error, setError] = useState("");
   const [image, setImage] = useState("");
   const [pageLoad, setPageLoad] = useState(true);
+
+  const token = localStorage.getItem("Token");
+  let currentDate = new Date();
+
+  /* Check token if expired */
+  if (token) {
+    const decodeToken = jwt_decode(token);
+    if (decodeToken.exp * 1000 < currentDate.getTime()) {
+      localStorage.clear();
+      history.push("/login");
+    }
+  }
 
   const headers = {
     headers: {

@@ -3,11 +3,11 @@ import { Link, useHistory } from "react-router-dom";
 import { HashLoader } from "react-spinners";
 import { BeatLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
+import jwt_decode from "jwt-decode";
 import Modal from "react-modal";
 import moment from "moment";
 import Axios from "axios";
 import "./Home.css";
-import jwt_decode from "jwt-decode";
 
 function Home() {
   let PAGE_NUMBER = 0;
@@ -20,12 +20,17 @@ function Home() {
   const [post, setPost] = useState([]);
   const [maxPage, setMaxPage] = useState("");
   const [userId, setUserId] = useState("");
-  let currentDate = new Date();
-  const token = localStorage.getItem("Token");
-  const decodeToken = jwt_decode(token);
 
-  if (decodeToken.exp * 1000 < currentDate.getTime()) {
-    history.push("/login");
+  const token = localStorage.getItem("Token");
+  let currentDate = new Date();
+
+  /* Check token if expired */
+  if (token) {
+    const decodeToken = jwt_decode(token);
+    if (decodeToken.exp * 1000 < currentDate.getTime()) {
+      localStorage.clear();
+      history.push("/login");
+    }
   }
 
   const showOptions = () => {

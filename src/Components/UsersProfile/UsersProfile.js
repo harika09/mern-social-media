@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useHistory } from "react-router-dom";
-import Navbar from "../Navbar/Navbar";
 import { HashLoader } from "react-spinners";
-import Axios from "axios";
+import Navbar from "../Navbar/Navbar";
+import jwt_decode from "jwt-decode";
 import "../Profile/Profile.css";
+import Axios from "axios";
 
 function UsersProfile() {
   const history = useHistory();
@@ -12,6 +13,18 @@ function UsersProfile() {
   const [isloading, setLoading] = useState(true);
   const [post, setPost] = useState([]);
   const [userId, setUserId] = useState("");
+
+  const token = localStorage.getItem("Token");
+  let currentDate = new Date();
+
+  /* Check token if expired */
+  if (token) {
+    const decodeToken = jwt_decode(token);
+    if (decodeToken.exp * 1000 < currentDate.getTime()) {
+      localStorage.clear();
+      history.push("/login");
+    }
+  }
 
   const headers = {
     headers: {

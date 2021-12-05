@@ -2,6 +2,7 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { HashLoader } from "react-spinners";
 import Navbar from "../Navbar/Navbar";
+import jwt_decode from "jwt-decode";
 import Modal from "react-modal";
 import moment from "moment";
 import Axios from "axios";
@@ -20,6 +21,18 @@ function ViewPost({ userID }) {
   const [actionModal, setActionModal] = useState(false);
   const [postId, setPostId] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
+
+  const token = localStorage.getItem("Token");
+  let currentDate = new Date();
+
+  /* Check token if expired */
+  if (token) {
+    const decodeToken = jwt_decode(token);
+    if (decodeToken.exp * 1000 < currentDate.getTime()) {
+      localStorage.clear();
+      history.push("/login");
+    }
+  }
 
   const showModal = () => {
     setIsModal(!isModal);

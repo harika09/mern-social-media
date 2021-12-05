@@ -105,6 +105,7 @@ function Login() {
                   <input
                     type="password"
                     placeholder="Enter Password"
+                    autoComplete="off"
                     value={password}
                     maxLength="50"
                     onChange={(e) => setPassword(e.target.value)}

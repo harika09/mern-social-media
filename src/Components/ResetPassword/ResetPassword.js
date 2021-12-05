@@ -60,6 +60,7 @@ function ResetPassword() {
             <img src={Logo} alt="logo" />
             <input
               type="password"
+              autoComplete="off"
               placeholder="Enter New Password"
               value={newPass}
               maxLength="50"
