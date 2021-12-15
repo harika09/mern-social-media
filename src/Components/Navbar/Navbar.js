@@ -26,14 +26,7 @@ function Navbar() {
     },
   };
 
-  const loadUsers = async () => {
-    const users = await Axios.get(
-      "https://mern-social-konek.herokuapp.com/auth/search/users",
-      headers
-    );
 
-    setUserList(users.data);
-  };
 
   const btnFollow = (id) => {
     Axios.put(
@@ -44,9 +37,7 @@ function Navbar() {
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
-    ).then((response) => {
-      loadUsers();
-    });
+    )
   };
 
   const btnUnFollow = (id) => {
@@ -58,21 +49,37 @@ function Navbar() {
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
-    ).then((response) => {
-      loadUsers();
-    });
+    )
   };
 
   useEffect(() => {
+    let componentMount = true
     const checkToken = localStorage.getItem("Token");
     const userData = localStorage.getItem("User");
     const data = JSON.parse(userData);
 
     if (checkToken) {
-      loadUsers();
+      const loadUsers = async () => {
+        const users = await Axios.get(
+          "https://mern-social-konek.herokuapp.com/auth/search/users",
+          headers
+        );
+    
+        if(componentMount){
+          setUserList(users.data);
+        }
+      };
+
+      loadUsers()
       setUserId(data._id);
+      return(()=>{
+        componentMount = false
+      })
+      
     }
-  }, []);
+
+    
+  }, [userList]);
 
   return (
     <div className="nav-container">

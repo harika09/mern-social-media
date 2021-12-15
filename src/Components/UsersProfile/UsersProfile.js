@@ -32,16 +32,7 @@ function UsersProfile() {
     },
   };
 
-  const loadProfile = async () => {
-    const profile = await Axios.get(
-      `https://mern-social-konek.herokuapp.com/auth/view/profile/${params.id}`,
-      headers
-    );
-
-    setProfile(profile.data.user);
-    setPost(profile.data.post);
-    setLoading(false);
-  };
+ 
 
   const btnFollow = (id) => {
     Axios.put(
@@ -52,9 +43,7 @@ function UsersProfile() {
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
-    ).then((response) => {
-      loadProfile();
-    });
+    )
   };
 
   const btnUnFollow = (id) => {
@@ -66,23 +55,45 @@ function UsersProfile() {
           Authorization: "Bearer " + localStorage.getItem("Token"),
         },
       }
-    ).then((response) => {
-      loadProfile();
-    });
+    )
   };
 
   useEffect(() => {
+    
     const Token = localStorage.getItem("Token");
     const userData = localStorage.getItem("User");
     const data = JSON.parse(userData);
 
-    if (Token) {
-      loadProfile();
-      setUserId(data._id);
-    } else {
+    if (!Token) {
       history.push("/login");
     }
-  }, [profile]);
+    setUserId(data._id);
+
+  });
+
+  useEffect(()=>{
+    let componentMount = true
+    const loadProfile = async () => {
+      const profile = await Axios.get(
+        `https://mern-social-konek.herokuapp.com/auth/view/profile/${params.id}`,
+        headers
+      );
+
+     setInterval(()=>{
+      if(componentMount){
+        setProfile(profile.data.user);
+        setPost(profile.data.post);
+        setLoading(false);
+      }
+     }, 1000)
+    }
+
+    loadProfile()
+    
+    return(()=>{
+      componentMount = false
+    })
+  },  [profile, post])
 
   return (
     <>

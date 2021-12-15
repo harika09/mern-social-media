@@ -65,21 +65,7 @@ function Profile() {
     },
   };
 
-  const loadUserInfo = async () => {
-    const userInfo = await Axios.get(
-      `https://mern-social-konek.herokuapp.com/auth/profile`,
-      headers
-    );
-
-    if (componentMount) {
-      setProfile(userInfo.data.user);
-      setPost(userInfo.data.post);
-      setLoading(false);
-      setFile(userInfo.data.user.image);
-      setFollowingUsers(userInfo.data.following);
-      setUserFollowers(userInfo.data.followers);
-    }
-  };
+ 
 
   const bntLogout = () => {
     localStorage.clear();
@@ -115,7 +101,7 @@ function Profile() {
         } else {
           /* Success update */
           setError(response.data.success);
-          loadUserInfo();
+          
           setIsModal(false);
         }
       }
@@ -123,20 +109,38 @@ function Profile() {
   };
 
   useEffect(() => {
+    let componentMount = true;
     const Token = localStorage.getItem("Token");
     const userData = localStorage.getItem("User");
     const data = JSON.parse(userData);
     if (Token) {
-      loadUserInfo();
+      const loadUserInfo = async () => {
+        const userInfo = await Axios.get(
+          `https://mern-social-konek.herokuapp.com/auth/profile`,
+          headers
+        );
+    
+        if (componentMount) {
+          setProfile(userInfo.data.user);
+          setPost(userInfo.data.post);
+          setLoading(false);
+          setFile(userInfo.data.user.image);
+          setFollowingUsers(userInfo.data.following);
+          setUserFollowers(userInfo.data.followers);
+        }
+      };
+
+      loadUserInfo()
       setUserId(data._id);
+      return () => {
+        componentMount = false;
+      };
     } else {
       history.push("/login");
     }
 
-    return () => {
-      componentMount = false;
-    };
-  }, [userId]);
+   
+  }, [profile, followingUsers, userFollowers]);
 
   return (
     <>

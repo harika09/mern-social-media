@@ -191,19 +191,29 @@ function Home() {
             </div>
           ) : (
             <div>
-              {post.map((posts, key) => {
+              {post.map((posts) => {
                 return (
                   <div key={posts._id} className="posts-container">
                     <div className="top-post-content">
                       <div className="post-user-info">
-                        <Link to={`/view/profile/${posts.userId}`}>
+                       {posts.userId === userId ? ( <Link to={`/profile`}>
+                          <img src={posts.avatar} alt={posts.username} />
+                        </Link>):(
+                          <Link to={`/view/profile/${posts.userId}`}>
                           <img src={posts.avatar} alt={posts.username} />
                         </Link>
+                       )}
 
                         <div>
-                          <Link to={`/view/profile/${posts.userId}`}>
+                         {posts.userId === userId ? (
+                            <Link to={`/profile`}>
                             <h3>{posts.username}</h3>
                           </Link>
+                         ):(
+                            <Link to={`/view/profile/${posts.userId}`}>
+                            <h3>{posts.username}</h3>
+                          </Link>
+                         )}
                           <span>{moment(posts.createdAt).fromNow()}</span>
                         </div>
                       </div>
